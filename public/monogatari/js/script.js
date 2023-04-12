@@ -101,6 +101,17 @@ monogatari.characters({
 			//	sad: 'sad.png',
 			//	surprised: 'surprised.png'
 		}
+	},
+	'clerk': {
+		color: '#ffff00',
+		directory: 'clerk',
+		sprites: {
+			//angry: 'normal.png',
+			//happy: 'happy.png',
+			normal: 'normal.png',
+			//	sad: 'sad.png',
+			//	surprised: 'surprised.png'
+		}
 	}
 });
 
@@ -140,43 +151,75 @@ monogatari.script({
 		"player Oh look, it looks like Grandma left me a note, with some money.",
 		'show image note with fadeIn',
 		"player It says that must go to the shop to get myself gear for the upcoming school hike.",
+		'jump Shop1'],
+	'Shop1': [
 		'show scene shop-exterior with fadeIn',
 		"player Here it is, the outdoor equipment store.",
 		'show scene shop-interior with fadeIn',
-
-
-
-
-		// {
-		// 	'Choice': {
-		// 		'Dialog': 'y Have you already read some documentation?',
-		// 		'Yes': {
-		// 			'Text': 'Yes',
-		// 			'Do': 'jump Yes'
-		// 		},
-		// 		'No': {
-		// 			'Text': 'No',
-		// 			'Do': 'jump No'
-		// 		}
-		// 	}
-		// }
+		'show character clerk normal at right with fadeIn',
+		'clerk Hi there',
+		'clerk What can I get for you?',
+		{
+			'Choice': {
+				'BrandName': {
+					'Text': 'Ask about expensive brands.',
+					'Do': 'jump BrandName'
+				},
+				'GoodValue': {
+					'Text': 'Ask about good value products.',
+					'Do': 'jump Shop2',
+					'Save': function () {
+						this.storage({
+							player: {
+								equipment: 'GoodValue'
+							}
+						});
+						return true;
+					},
+				},
+			},
+		}],
+	'BrandName': [
+		'player If I buy the cool brand name clothes, I wont have enough money to get everything.',
+		{
+			'Choice': {
+				'BrandName': {
+					'Text': "It's ok, I want those brand names.",
+					'Save': function () {
+						this.storage({
+							player: {
+								equipment: 'BrandName'
+							}
+						});
+						return true;
+					},
+					'Do': 'jump Shop2',
+				},
+				'ChangeMind': {
+					'Text': 'Ask about good value products.',
+					'Do': 'jump Shop2',
+					'Save': function () {
+						this.storage({
+							player: {
+								equipment: 'GoodValue'
+							}
+						});
+						return true;
+					},
+				},
+			}
+		}
 	],
-
-	'Yes': [
-		'y Thats awesome!',
-		'y Then you are ready to go ahead and create an amazing Game!',
-		'y I can’t wait to see what story you’ll tell!',
-		'end'
-	],
-
-	'No': [
-
-		'y You can do it now.',
-
-		'show message Help',
-
-		'y Go ahead and create an amazing Game!',
-		'y I can’t wait to see what story you’ll tell!',
-		'end'
+	'Shop2': [
+		'clerk Ok, here is your {{player.equipment}}'
 	]
+
+
+
+
+
+
+
+
+
 });
