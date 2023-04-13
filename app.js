@@ -26,6 +26,18 @@ app.get('/', function (req, res, next) {
   res.render('index');
 });
 
+
+app.get('/admin', function (req, res, next) {
+  res.render('admin-panel');
+});
+
+
+app.get('/game', function (req, res, next) {
+  res.render('game');
+});
+
+
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
