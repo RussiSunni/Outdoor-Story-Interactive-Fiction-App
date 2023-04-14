@@ -6,3 +6,22 @@ body {
 a {
   color: #00B7FF;
 }
+
+
+/* Log in page */
+
+.login-page {
+  height: 100%;
+  background-color: #b4cadd;
+  padding: 10px;
+}
+
+.form-signin {
+  background-color: white;
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+  border: 1px solid black;
+  border-radius: 25px;
+}

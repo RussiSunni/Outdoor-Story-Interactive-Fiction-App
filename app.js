@@ -22,6 +22,37 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/', indexRouter);
 // app.use('/users', usersRouter);
 /* GET home page. */
+
+// Middleware 
+const mysql = require('mysql');
+
+/*------------------------------------------
+--------------------------------------------
+Database Connection
+--------------------------------------------
+--------------------------------------------*/
+const conn = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'H3@lthyL1f35tyl3s',
+  password: 'password',
+  database: 'healthy_lifestyles'
+});
+
+/*------------------------------------------
+--------------------------------------------
+Shows Mysql Connect
+--------------------------------------------
+--------------------------------------------*/
+conn.connect((err) => {
+  if (err) {
+    throw err;
+  }
+  console.log('MariaDB connected...');
+});
+
+
+// Routes.
 app.get('/', function (req, res, next) {
   res.render('index');
 });
@@ -34,6 +65,43 @@ app.get('/admin', function (req, res, next) {
 
 app.get('/game', function (req, res, next) {
   res.render('game');
+});
+
+
+// Login.
+app.post('/login-attempt', (req, res, next) => {
+
+  res.setHeader('Content-Type', 'application/json');
+  // Execute SQL query that'll select the account from the database based on the specified username and password.
+  let sqlQuery1 = "SELECT * FROM healthy_lifestyles.users WHERE healthy_lifestyles.users.username = '" + req.body.username + "' AND healthy_lifestyles.users.password = '" + req.body.password + "';";
+  let query1 = conn.query(sqlQuery1, (err, results) => {
+    try {
+      if (err) {
+        throw err;
+      }
+      // Create session object.
+      else if (results.length > 0) {
+        console.log(results)
+        console.log(results[0])
+        console.log(results[0].is_admin)
+        if (results[0].is_admin == 1) {
+          res.redirect('/admin');
+        }
+        else {
+          res.redirect('/game');
+        }
+        // session = req.session;
+        // session.userId = results[0].id;
+        // session.userName = req.body.username;
+        // session.firstName = results[0].first_name;
+        // session.lastName = results[0].last_name;    
+        // session.isAdmin = results[0].is_admin;
+        // res.redirect('/');
+      }
+    } catch (err) {
+      next(err)
+    }
+  });
 });
 
 
