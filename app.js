@@ -34,8 +34,9 @@ Database Connection
 const conn = mysql.createConnection({
   host: 'localhost',
   user: 'admin',
+  //user: 'root',
   password: 'H3@lthyL1f35tyl3s',
-  // password: 'password',
+  //password: 'password',
   database: 'healthy_lifestyles'
 });
 
@@ -63,6 +64,24 @@ app.get('/admin', function (req, res, next) {
 });
 
 
+app.get('/api/users', function (req, res, next) {
+  res.setHeader('Content-Type', 'application/json');
+  let sqlQuery = "SELECT * FROM healthy_lifestyles.users;";
+  let query = conn.query(sqlQuery, (err, results) => {
+    try {
+      if (err) {
+        throw err;
+      }
+      else {
+        res.json(results);
+      }
+    } catch (err) {
+      next(err)
+    }
+  });
+});
+
+
 app.get('/game', function (req, res, next) {
   res.render('game');
 });
@@ -70,7 +89,6 @@ app.get('/game', function (req, res, next) {
 
 // Login.
 app.post('/login-attempt', (req, res, next) => {
-
   res.setHeader('Content-Type', 'application/json');
   // Execute SQL query that'll select the account from the database based on the specified username and password.
   let sqlQuery1 = "SELECT * FROM healthy_lifestyles.users WHERE healthy_lifestyles.users.username = '" + req.body.username + "' AND healthy_lifestyles.users.password = '" + req.body.password + "';";
@@ -81,9 +99,6 @@ app.post('/login-attempt', (req, res, next) => {
       }
       // Create session object.
       else if (results.length > 0) {
-        console.log(results)
-        console.log(results[0])
-        console.log(results[0].is_admin)
         if (results[0].is_admin == 1) {
           res.redirect('/admin');
         }
