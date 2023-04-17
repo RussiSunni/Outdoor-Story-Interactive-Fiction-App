@@ -34,9 +34,9 @@ Database Connection
 const conn = mysql.createConnection({
   host: 'localhost',
   user: 'admin',
-  //user: 'root',
+  // user: 'root',
   password: 'H3@lthyL1f35tyl3s',
-  //password: 'password',
+  // password: 'password',
   database: 'healthy_lifestyles'
 });
 
@@ -83,7 +83,8 @@ app.get('/api/users', function (req, res, next) {
 
 
 app.get('/game', function (req, res, next) {
-  res.render('game');
+  var username = req.query.username;
+  res.render('game', { username: username });
 });
 
 
@@ -103,7 +104,7 @@ app.post('/login-attempt', (req, res, next) => {
           res.redirect('/admin');
         }
         else {
-          res.redirect('/game');
+          res.redirect('/game?username=' + results[0].username);
         }
         // session = req.session;
         // session.userId = results[0].id;
@@ -118,7 +119,6 @@ app.post('/login-attempt', (req, res, next) => {
     }
   });
 });
-
 
 
 // catch 404 and forward to error handler

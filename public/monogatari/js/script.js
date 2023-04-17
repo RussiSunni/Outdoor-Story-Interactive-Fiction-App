@@ -119,30 +119,6 @@ monogatari.script({
 	// The game starts here.
 	'Start': [
 		'show scene house with fadeIn',
-		{
-			'Input': {
-				'Text': 'What is your name?',
-				'Validation': function (input) {
-					return input.trim().length > 0;
-				},
-				'Save': function (input) {
-					this.storage({
-						player: {
-							name: input
-						}
-					});
-					return true;
-				},
-				'Revert': function () {
-					this.storage({
-						player: {
-							name: ''
-						}
-					});
-				},
-				'Warning': 'You must enter a name!'
-			}
-		},
 		"player My house.",
 		"player I wonder if Grandma's home.",
 		'show scene kitchen with fadeIn',
@@ -157,7 +133,7 @@ monogatari.script({
 		"player Here it is, the outdoor equipment store.",
 		'show scene shop-interior with fadeIn',
 		'show character clerk normal at right with fadeIn',
-		'clerk Hi there',
+		'clerk Hi there {{player.name}}',
 		'clerk What can I get for you?',
 		{
 			'Choice': {
