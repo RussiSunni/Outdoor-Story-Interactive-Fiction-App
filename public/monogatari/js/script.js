@@ -1,5 +1,6 @@
 /* global monogatari */
 
+
 // Define the messages used in the game.
 monogatari.action('message').messages({
 	'Help': {
@@ -74,6 +75,7 @@ monogatari.assets('scenes', {
 	'bedroom': 'bedroom-4.png',
 	'shop-exterior': 'restaurant-8.png',
 	'shop-interior': 'shop-interior.jpg',
+	'school': 'school-1.png',
 	'forest': 'forest.jpg'
 });
 
@@ -112,6 +114,28 @@ monogatari.characters({
 			//	sad: 'sad.png',
 			//	surprised: 'surprised.png'
 		}
+	},
+	'tony': {
+		color: '#ffff00',
+		directory: 'tony',
+		sprites: {
+			//angry: 'normal.png',
+			happy: 'happy.png',
+			//normal: 'normal.png',
+			//	sad: 'sad.png',
+			//	surprised: 'surprised.png'
+		}
+	},
+	'sam': {
+		color: '#ffff00',
+		directory: 'sam',
+		sprites: {
+			//angry: 'normal.png',
+			happy: 'happy.png',
+			//normal: 'normal.png',
+			//	sad: 'sad.png',
+			//	surprised: 'surprised.png'
+		}
 	}
 });
 
@@ -139,63 +163,59 @@ monogatari.script({
 			'Choice': {
 				'BrandName': {
 					'Text': 'Ask about expensive brands.',
-					'Do': 'jump BrandName'
+					"onChosen": function () {
+						monogatari.storage().player.equipment = "Expensive Brand";
+					},
+					'Do': 'jump Shop2',
 				},
 				'GoodValue': {
 					'Text': 'Ask about good value products.',
-					'Do': 'jump Shop2',
-					'Save': function () {
-						this.storage({
-							player: {
-								equipment: 'GoodValue'
-							}
-						});
-						return true;
+					"onChosen": function () {
+						monogatari.storage().player.equipment = "Good Value"
 					},
+					'Do': 'jump Shop2',
 				},
 			},
 		}],
-	'BrandName': [
-		'player If I buy the cool brand name clothes, I wont have enough money to get everything.',
-		{
-			'Choice': {
-				'BrandName': {
-					'Text': "It's ok, I want those brand names.",
-					'Save': function () {
-						this.storage({
-							player: {
-								equipment: 'BrandName'
-							}
-						});
-						return true;
-					},
-					'Do': 'jump Shop2',
-				},
-				'ChangeMind': {
-					'Text': 'Ask about good value products.',
-					'Do': 'jump Shop2',
-					'Save': function () {
-						this.storage({
-							player: {
-								equipment: 'GoodValue'
-							}
-						});
-						return true;
-					},
-				},
-			}
-		}
-	],
+	// 'BrandName': [
+	// 	'player If I buy the cool brand name clothes, I wont have enough money to get everything.',
+	// 	{
+	// 		'Choice': {
+	// 			'BrandName': {
+	// 				'Text': "It's ok, I want those brand names.",
+	// 				"onChosen": function () { test() },
+	// 				'Do': 'jump Shop2',
+	// 				'Save':
+	// 					monogatari.storage().player.equipment = "Brand Name",
+	// 			},
+	// 			'ChangeMind': {
+	// 				'Text': 'Ask about good value products.',
+	// 				'Do': 'jump Shop2',
+	// 				// 'Save':
+	// 				// 	monogatari.storage().player.equipment = "Good Value"
+	// 			},
+	// 		}
+	// 	}
+	// ],
 	'Shop2': [
-		'clerk Ok, here is your {{player.equipment}}'
+		'clerk Ok, here is your gear. Hope you have a good trip.',
+		'jump School'
+	],
+	'School': [
+		'show scene school with fadeIn',
+		"We're supposed to meet at school before going to the campsite.",
+		'show character sam happy at center with fadeIn',
 	]
 
-
-
-
-
-
-
-
-
 });
+
+function test() {
+	console.log("test123")
+	fetch('/test', {
+		method: 'POST',
+		headers: {
+			"Content-type": "application/json; charset=UTF-8"
+		},
+	});
+};
+
