@@ -71,6 +71,8 @@ monogatari.assets('images', {
 // Define the backgrounds for each scene.
 monogatari.assets('scenes', {
 	'house': 'house-2.png',
+	'hallway': 'hallway-1.png',
+	'library': 'library-3.png',
 	'kitchen': 'kitchen-1.png',
 	'bedroom': 'bedroom-4.png',
 	'shop-exterior': 'restaurant-8.png',
@@ -136,6 +138,17 @@ monogatari.characters({
 			//	sad: 'sad.png',
 			//	surprised: 'surprised.png'
 		}
+	},
+	'zack': {
+		color: '#ffff00',
+		directory: 'zack',
+		sprites: {
+			//angry: 'normal.png',
+			happy: 'happy-facing-right.png',
+			//normal: 'normal.png',
+			//	sad: 'sad.png',
+			//	surprised: 'surprised.png'
+		}
 	}
 });
 
@@ -145,9 +158,12 @@ monogatari.script({
 		'show scene house with fadeIn',
 		"player My house.",
 		"player I wonder if Grandma's home.",
-		'show scene kitchen with fadeIn',
-		//'show character grandma normal at right with fadeIn',
+		'show scene hallway with fadeIn',
 		"player Hmm, seems like the house is empty.",
+		'show scene library with fadeIn',
+		'I always like to looks at the photos of Grandpa hiking and camping',
+		'What an exciting life. Nothing ever happens in my life...',
+		'show scene kitchen with fadeIn',
 		"player Oh look, it looks like Grandma left me a note, with some money.",
 		'show image note with fadeIn',
 		"player It says that must go to the shop to get myself gear for the upcoming school hike.",
@@ -204,7 +220,18 @@ monogatari.script({
 	'School': [
 		'show scene school with fadeIn',
 		"We're supposed to meet at school before going to the campsite.",
-		'show character sam happy at center with fadeIn',
+		'show character sam happy at right with fadeIn',
+		"Hi Sam!",
+		"Sam's a real brainiac. She is like an encyclopedia.",
+		'show character zack happy at left with fadeIn',
+		"And there's Zack. He's one of the school's best athletes.",
+		'jump Trail1'
+	],
+	'Trail1': [
+		'show scene forest with fadeIn',
+		'I AM JUST SKIPPING FORWARD HERE, TO THE FOREST PART.',
+		"sam Wow, it's gotten so misty.",
+		"zack Hey guys, is that a Queen Alexandra's birdwing butterfly?",
 	]
 
 });
