@@ -65,7 +65,8 @@ monogatari.assets('videos', {
 
 // Define the images used in the game.
 monogatari.assets('images', {
-	'note': 'handwritten-note.png'
+	'note': 'handwritten-note.png',
+	'butterfly': 'butterfly.png'
 });
 
 // Define the backgrounds for each scene.
@@ -78,7 +79,9 @@ monogatari.assets('scenes', {
 	'shop-exterior': 'restaurant-8.png',
 	'shop-interior': 'shop-interior.jpg',
 	'school': 'school-1.png',
-	'forest': 'forest.jpg'
+	'forest-mist': 'forest-mist-1.png',
+	'forest-path': 'forest-path-1.png',
+	'deep-forest': 'deep-forest-1.png'
 });
 
 
@@ -96,6 +99,7 @@ monogatari.characters({
 		}
 	},
 	'grandma': {
+		name: 'Grandma',
 		color: '#ffff00',
 		directory: 'grandma',
 		sprites: {
@@ -107,6 +111,7 @@ monogatari.characters({
 		}
 	},
 	'clerk': {
+		name: 'Clerk',
 		color: '#ffff00',
 		directory: 'clerk',
 		sprites: {
@@ -118,6 +123,7 @@ monogatari.characters({
 		}
 	},
 	'tony': {
+		name: 'Tony',
 		color: '#ffff00',
 		directory: 'tony',
 		sprites: {
@@ -129,6 +135,7 @@ monogatari.characters({
 		}
 	},
 	'sam': {
+		name: 'Sam',
 		color: '#ffff00',
 		directory: 'sam',
 		sprites: {
@@ -140,6 +147,7 @@ monogatari.characters({
 		}
 	},
 	'zack': {
+		name: 'Zack',
 		color: '#ffff00',
 		directory: 'zack',
 		sprites: {
@@ -156,10 +164,10 @@ monogatari.script({
 	// The game starts here.
 	'Start': [
 		'show scene house with fadeIn',
-		"player My house.",
-		"player I wonder if Grandma's home.",
+		"My house.",
+		"I wonder if Grandma's home.",
 		'show scene hallway with fadeIn',
-		"player Hmm, seems like the house is empty.",
+		"Hmm, seems like the house is empty.",
 		'show scene library with fadeIn',
 		'I always like to looks at the photos of Grandpa hiking and camping',
 		'What an exciting life. Nothing ever happens in my life...',
@@ -222,17 +230,46 @@ monogatari.script({
 		"We're supposed to meet at school before going to the campsite.",
 		'show character sam happy at right with fadeIn',
 		"Hi Sam!",
-		"Sam's a real brainiac. She is like an encyclopedia.",
+		"Sam knows everything about insects. She is like an encyclopedia.",
 		'show character zack happy at left with fadeIn',
 		"And there's Zack. He's one of the school's best athletes.",
 		'jump Trail1'
 	],
 	'Trail1': [
-		'show scene forest with fadeIn',
+		'show scene forest-mist with fadeIn',
 		'I AM JUST SKIPPING FORWARD HERE, TO THE FOREST PART.',
+		'show image butterfly with fadeIn',
+		'show character sam happy at right with fadeIn',
+		'show character zack happy at left with fadeIn',
 		"sam Wow, it's gotten so misty.",
-		"zack Hey guys, is that a Queen Alexandra's birdwing butterfly?",
-	]
+		'zack Hey guys, check that butterfly!',
+		"zack It's huge.",
+		"sam is that a birdwing butterfly?",
+		"zack How should I know.",
+		"sam wow, it looks like a Queen Alexandra's birdwing.",
+		"zack lets follow it.",
+		"sam yeah, I've never seen one for real before.",
+		"uh guys, that means we will leave the path.",
+		"We could get lost in the deep forest.",
+		{
+			'Choice': {
+				'LeavePath': {
+					'Text': "Ok, let's follow it. This is a once in a lifetime chance.",
+					'Do': 'jump DeepForest1',
+				},
+				'StayOnPath': {
+					'Text': 'Guys, we said we would stay on the path. You know what XYZ said about getting lost.',
+					'Do': 'jump Trail2',
+				},
+			},
+		},
+	],
+	'Trail2': [
+		'show scene forest-path with fadeIn',
+	],
+	'DeepForest1': [
+		'show scene deep-forest with fadeIn',
+	],
 
 });
 
