@@ -71,6 +71,8 @@ monogatari.assets('images', {
 
 // Define the backgrounds for each scene.
 monogatari.assets('scenes', {
+	'apartment': 'apartment-1.png',
+	'elevator': 'elevator-2.png',
 	'house': 'house-2.png',
 	'hallway': 'hallway-1.png',
 	'library': 'library-3.png',
@@ -163,11 +165,14 @@ monogatari.characters({
 monogatari.script({
 	// The game starts here.
 	'Start': [
-		'show scene house with fadeIn',
-		"My house.",
-		"I wonder if Grandma's home.",
+		'show scene apartment with fadeIn',
+		"Our home.",
+		"The big and bustling city.",
+		'show scene elevator with fadeIn',
+		"I wish I could go to wild places, like Grandpa used to.",
 		'show scene hallway with fadeIn',
-		"Hmm, seems like the house is empty.",
+		"I wonder if Grandma's here.",
+		"Hmm, seems like the place is empty.",
 		'show scene library with fadeIn',
 		'I always like to looks at the photos of Grandpa hiking and camping',
 		'What an exciting life. Nothing ever happens in my life...',
@@ -231,6 +236,7 @@ monogatari.script({
 		'show character sam happy at right with fadeIn',
 		"Hi Sam!",
 		"Sam knows everything about insects. She is like an encyclopedia.",
+		'hide character sam with fadeOut',
 		'show character zack happy at left with fadeIn',
 		"And there's Zack. He's one of the school's best athletes.",
 		'jump Trail1'
@@ -239,8 +245,8 @@ monogatari.script({
 		'show scene forest-mist with fadeIn',
 		'I AM JUST SKIPPING FORWARD HERE, TO THE FOREST PART.',
 		'show image butterfly with fadeIn',
-		'show character sam happy at right with fadeIn',
-		'show character zack happy at left with fadeIn',
+		// 'show character sam happy at right with fadeIn',
+		// 'show character zack happy at left with fadeIn',
 		"sam Wow, it's gotten so misty.",
 		'zack Hey guys, check that butterfly!',
 		"zack It's huge.",
@@ -266,9 +272,15 @@ monogatari.script({
 	],
 	'Trail2': [
 		'show scene forest-path with fadeIn',
+		'show character sam happy at right with fadeIn',
+		'show character zack happy at left with fadeIn',
+		"zack aww, you're no fun at all.",
+		"sam guys, wait up, I need to tie my shoelace."
 	],
 	'DeepForest1': [
 		'show scene deep-forest with fadeIn',
+		'show character sam happy at right with fadeIn',
+		'show character zack happy at left with fadeIn',
 	],
 
 });
