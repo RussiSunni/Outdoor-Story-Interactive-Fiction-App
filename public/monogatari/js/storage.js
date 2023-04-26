@@ -5,5 +5,6 @@ monogatari.storage({
 	player: {
 		name: '',
 		equipment: ''
-	}
+	},
+	first_meal: ''
 });

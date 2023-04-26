@@ -17,7 +17,7 @@ monogatari.settings({
 	// The name of your game, this will be used to store all the data so once
 	// you've released a game using one name, it shouldn't change. Please use the
 	// Version Setting to indicate a new release of your game!
-	'Name': 'My Visual Novel',
+	'Name': 'Healthy Lifestyles',
 
 	// The version of your game in semantic versioning (https://semver.org/).
 	'Version': '0.1.0',
@@ -86,7 +86,7 @@ monogatari.settings({
 	// to portrait or landscape, a warning message will be displayed so the
 	// player rotates its device.
 	// Possible values: any, portrait or landscape.
-	'Orientation': 'any',
+	'Orientation': 'portrait',
 
 	// Allow players to skip through the game. Similar to the auto play feature,
 	// skipping will allow players to go through the game really fast.
