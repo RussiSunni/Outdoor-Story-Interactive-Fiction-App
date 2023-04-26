@@ -69,7 +69,7 @@ monogatari.assets('scenes', {
 	'library': 'library-3.png',
 	'kitchen': 'kitchen.png',
 	'bedroom': 'bedroom-4.png',
-	'shop-exterior': 'restaurant-8.png',
+	'shop-exterior': 'hiking-shop-exterior.png',
 	'shop-interior': 'hiking-shop.png',
 	'school': 'school-1.png',
 	'forest-mist': 'forest-mist-1.png',
@@ -139,13 +139,25 @@ monogatari.characters({
 			//	surprised: 'surprised.png'
 		}
 	},
+	'emily': {
+		name: 'Emily',
+		color: '#ffff00',
+		directory: 'emily',
+		sprites: {
+			//angry: 'normal.png',
+			happy: 'happy.png',
+			//normal: 'normal.png',
+			//	sad: 'sad.png',
+			//	surprised: 'surprised.png'
+		}
+	},
 	'zack': {
 		name: 'Zack',
 		color: '#ffff00',
 		directory: 'zack',
 		sprites: {
 			//angry: 'normal.png',
-			happy: 'happy-facing-right.png',
+			happy: 'happy.png',
 			//normal: 'normal.png',
 			//	sad: 'sad.png',
 			//	surprised: 'surprised.png'
@@ -249,11 +261,11 @@ monogatari.script({
 	'School': [
 		'show scene school with fadeIn',
 		"We're supposed to meet at school before going to the campsite.",
-		'show character sam happy at right with fadeIn',
-		"Hi Sam!",
-		"sam Hi {{player.name}}!",
-		"Sam knows everything about insects. She is like an encyclopedia.",
-		'hide character sam with fadeOut',
+		'show character emily happy at right with fadeIn',
+		"Hi Emily!",
+		"emily Hi {{player.name}}!",
+		"Emily knows everything about insects. She is like an encyclopedia.",
+		'hide character emily with fadeOut',
 		'show character zack happy at left with fadeIn',
 		"zack Hey {{player.name}}.",
 		"And there's Zack. He's one of the school's best athletes.",
