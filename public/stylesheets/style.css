@@ -1,5 +1,9 @@
+html,
 body {
-  padding: 50px;
+  height: 100%;
+}
+
+body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -12,8 +16,8 @@ a {
 
 .login-page {
   height: 100%;
-  background-color: #228B22;
-  padding: 10px;
+  background-image: url("../images/login-background.png");
+  background-size: cover;
 }
 
 .form-signin {
