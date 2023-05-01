@@ -172,7 +172,7 @@ monogatari.script({
 		"Our home.",
 		"The big and bustling city.",
 		'show scene elevator with fadeIn',
-		"Aother boring day. Nothing ever happens here.",
+		"Another boring day. Nothing ever happens here.",
 		'show scene hallway with fadeIn',
 		"I wonder if Grandma's home.",
 		"Hmm, seems like the place is empty.",
