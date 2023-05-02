@@ -66,10 +66,14 @@ monogatari.assets('scenes', {
 	'elevator': 'elevator-2.png',
 	'house': 'house-2.png',
 	'hallway': 'hallway.png',
+	'photo-closeup': 'photo-closeup.png',
 	'library': 'library-3.png',
 	'kitchen': 'kitchen.png',
+	'cash': 'cash.png',
 	'bedroom': 'bedroom-4.png',
+	'park': 'park.png',
 	'shop-exterior': 'hiking-shop-exterior.png',
+	'boot-advert': 'boot-advert.png',
 	'shop-interior': 'hiking-shop.png',
 	'school': 'school-1.png',
 	'forest-mist': 'forest-mist-1.png',
@@ -176,6 +180,7 @@ monogatari.script({
 		'show scene hallway with fadeIn',
 		"I wonder if Grandma's home.",
 		"Hmm, seems like the place is empty.",
+		'show scene photo-closeup with fadeIn',
 		"I wish I could go to wild places, like Grandpa used to.",
 		'What an exciting life. Nothing ever happens in my life...',
 		'show scene kitchen with fadeIn',
@@ -198,13 +203,30 @@ monogatari.script({
 				},
 			},
 		},
-		"player Oh look, Grandma left me a note, with some money.",
-		'show image note with fadeIn',
-		"player It says that must go to the shop to get myself gear for the upcoming school hike.",
-		'jump Shop1'],
+		'show scene cash with fadeIn',
+		"player Oh look, Grandma left me some money to get myself gear for the upcoming hike with Grandpa.",
+		"player I'm so excited. Finally, a real adventure.",
+		"I'm going to go get the stuff right now right now.",
+		'jump Park'],
+	'Park': [
+		'show scene park with fadeIn',
+		'show character emily happy at right with fadeIn',
+		"Hi Emily!",
+		"emily Hi {{player.name}}!",
+		"Emily knows everything about insects. She is like an encyclopedia.",
+		'hide character emily with fadeOut',
+		'show character zack happy at left with fadeIn',
+		"zack Hey {{player.name}}.",
+		"And there's Zack. He's one of the school's best athletes.",
+		'jump Shop1'
+	],
 	'Shop1': [
 		'show scene shop-exterior with fadeIn',
 		"player Here it is, the outdoor equipment store.",
+		'show scene boot-advert with fadeIn',
+		"player Whoa, check out those boots. If I get them, everyone will think I am so cool.",
+		"emily If you get those boots, you won't be able to afford anything else.",
+		"player Yeah, I'd have to rely on what I have already.",
 		'show scene shop-interior with fadeIn',
 		//'show character clerk normal at right with fadeIn',
 		'clerk Hi there {{player.name}}',
@@ -212,14 +234,14 @@ monogatari.script({
 		{
 			'Choice': {
 				'BrandName': {
-					'Text': 'Ask about expensive brands.',
+					'Text': "I'd like a piar of those boots in the window please.",
 					"onChosen": function () {
 						monogatari.storage().player.equipment = "Expensive Brand";
 					},
 					'Do': 'clerk Ok, here is your gear. Hope you have a good trip.',
 				},
 				'GoodValue': {
-					'Text': 'Ask about good value products.',
+					'Text': 'I need some relatively cheap boots, a rain jacket, and a thermal top, please.',
 					"onChosen": function () {
 						monogatari.storage().player.equipment = "Good Value"
 					},
@@ -257,20 +279,7 @@ monogatari.script({
 				'False': 'Ok, thanks.'
 			}
 		},
-		'jump School'],
-	'School': [
-		'show scene school with fadeIn',
-		"We're supposed to meet at school before going to the campsite.",
-		'show character emily happy at right with fadeIn',
-		"Hi Emily!",
-		"emily Hi {{player.name}}!",
-		"Emily knows everything about insects. She is like an encyclopedia.",
-		'hide character emily with fadeOut',
-		'show character zack happy at left with fadeIn',
-		"zack Hey {{player.name}}.",
-		"And there's Zack. He's one of the school's best athletes.",
-		'jump Trail1'
-	],
+		'jump Trail1'],
 	'Trail1': [
 		'show scene forest-mist with fadeIn',
 		'I AM JUST SKIPPING FORWARD HERE, TO THE FOREST PART.',
