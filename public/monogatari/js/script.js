@@ -222,6 +222,15 @@ monogatari.script({
 	],
 	'Shop1': [
 		'show scene shop-exterior with fadeIn',
+		{
+			'Conditional': {
+				'Condition': function () {
+					return this.storage('first_meal') == 'Donuts';
+				},
+				'True': 'I feel so tired. Wish I had eaten something better than just donuts.',
+				'False': 'Ok, thanks.'
+			}
+		},
 		"player Here it is, the outdoor equipment store.",
 		'show scene boot-advert with fadeIn',
 		"player Whoa, check out those boots. If I get them, everyone will think I am so cool.",
@@ -234,16 +243,16 @@ monogatari.script({
 		{
 			'Choice': {
 				'BrandName': {
-					'Text': "I'd like a piar of those boots in the window please.",
+					'Text': "I'd like a pair of those boots in the window please.",
 					"onChosen": function () {
-						monogatari.storage().player.equipment = "Expensive Brand";
+						monogatari.storage().equipment = "Expensive Boots";
 					},
 					'Do': 'clerk Ok, here is your gear. Hope you have a good trip.',
 				},
 				'GoodValue': {
 					'Text': 'I need some relatively cheap boots, a rain jacket, and a thermal top, please.',
 					"onChosen": function () {
-						monogatari.storage().player.equipment = "Good Value"
+						monogatari.storage().equipment = "Good Value"
 					},
 					'Do': 'clerk Ok, here is your gear. Hope you have a good trip.',
 				},
@@ -272,11 +281,10 @@ monogatari.script({
 		{
 			'Conditional': {
 				'Condition': function () {
-
-					return this.storage('first_meal') == 'Donuts';
+					return this.storage('equipment') == 'Expensive Boots';
 				},
-				'True': 'I feel so tired. Wish I had eaten something better than just donuts.',
-				'False': 'Ok, thanks.'
+				'True': "emily Cool boots, but I don't know what you are going to do if it rains or is cold up there.",
+				'False': "emily Those boots are pretty dorky, but at least you're covered if it rains or gets cold up there."
 			}
 		},
 		'jump Trail1'],

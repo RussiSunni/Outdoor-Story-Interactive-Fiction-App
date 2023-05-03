@@ -3,8 +3,8 @@
 // Persistent Storage Variable
 monogatari.storage({
 	player: {
-		name: '',
-		equipment: ''
+		name: ''
 	},
-	first_meal: ''
+	first_meal: '',
+	equipment: ''
 });
