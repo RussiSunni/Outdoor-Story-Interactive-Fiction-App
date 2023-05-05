@@ -21,11 +21,17 @@ a {
 }
 
 .form-signin {
-  background-color: white;
+  background-color: #0f3a53;
+  color: #fcfeca;
   width: 100%;
   max-width: 330px;
   padding: 15px;
   margin: 0 auto;
   border: 1px solid black;
   border-radius: 25px;
+}
+
+/* Bootstrap class */
+.accordion-button::after {
+  filter: invert();
 }
