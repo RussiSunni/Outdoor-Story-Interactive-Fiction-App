@@ -98,21 +98,53 @@ app.post('/login-attempt', (req, res, next) => {
       if (err) {
         throw err;
       }
-      // Create session object.
+      // If record is found.
       else if (results.length > 0) {
         if (results[0].is_admin == 1) {
           res.redirect('/admin');
         }
         else {
-          res.redirect('/game?username=' + results[0].username);
+          res.json({ account: 'authorized' })
         }
-        // session = req.session;
-        // session.userId = results[0].id;
-        // session.userName = req.body.username;
-        // session.firstName = results[0].first_name;
-        // session.lastName = results[0].last_name;    
-        // session.isAdmin = results[0].is_admin;
-        // res.redirect('/');
+      }
+      else {
+        // If both the username and password are not correct, check if the account exists.
+        let sqlQuery2 = "SELECT * FROM healthy_lifestyles.users WHERE healthy_lifestyles.users.username = '" + req.body.username + "';";
+        let query2 = conn.query(sqlQuery2, (err, results) => {
+          try {
+            if (err) {
+              throw err;
+            }
+            // Tell user their password is incorrect.
+            else if (results.length > 0) {
+              res.json({ account: 'wrong-password' })
+            }
+            // If neither the username or password are correct, let user know.
+            else {
+              res.json({ account: 'no-account' })
+            }
+          } catch (err) {
+            next(err)
+          }
+        });
+      }
+    } catch (err) {
+      next(err)
+    }
+  });
+});
+
+
+app.post('/test', (req, res, next) => {
+  console.log("test111111")
+  let sqlQuery = "INSERT INTO healthy_lifestyles.choices (user_id, choice_001) values (1, 1)";
+  let query = conn.query(sqlQuery, (err, results) => {
+    try {
+      if (err) {
+        throw err;
+      }
+      else {
+        res.end();
       }
     } catch (err) {
       next(err)

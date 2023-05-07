@@ -206,7 +206,7 @@ monogatari.script({
 		'show scene cash with fadeIn',
 		"player Oh look, Grandma left me some money to get myself gear for the upcoming hike with Grandpa.",
 		"player I'm so excited. Finally, a real adventure.",
-		"I'm going to go get the stuff right now right now.",
+		"I'm going to go get the stuff right now.",
 		'jump Park'],
 	'Park': [
 		'show scene park with fadeIn',
