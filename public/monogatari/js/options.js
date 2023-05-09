@@ -26,7 +26,7 @@ monogatari.settings({
 	'Label': 'Start',
 
 	// Number of AutoSave Slots
-	'Slots': 10,
+	'Slots': 3,
 
 	// Change to true for a MultiLanguage GameScreen.
 	'MultiLanguage': false,
@@ -58,12 +58,12 @@ monogatari.settings({
 
 	// The Aspect Ratio your background images are on. This only has effect on
 	// web deployed novels if forceAspectRatio flag is on.
-	'AspectRatio': '16:9',
+	'AspectRatio': '2:3',
 
 	// Force aspect ratio, it will make all images to comply with aspect ratio.
 	// Values: 'None' (don't force), 'Visuals' (force only visuals)
 	// or 'Global' (force all game)
-	'ForceAspectRatio': 'None',
+	'ForceAspectRatio': 'Visuals',
 
 	// Enables or disables the typing text animation for the whole game.
 	'TypeAnimation': true,
