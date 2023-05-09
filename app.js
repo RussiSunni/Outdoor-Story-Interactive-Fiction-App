@@ -34,9 +34,9 @@ Database Connection
 const conn = mysql.createConnection({
   host: 'localhost',
   user: 'admin',
-  // user: 'root',
+  //user: 'root',
   password: 'H3@lthyL1f35tyl3s',
-  // password: 'password',
+  //password: 'password',
   database: 'healthy_lifestyles'
 });
 
@@ -101,10 +101,10 @@ app.post('/login-attempt', (req, res, next) => {
       // If record is found.
       else if (results.length > 0) {
         if (results[0].is_admin == 1) {
-          res.redirect('/admin');
+          res.json({ account: 'authorized-admin' })
         }
         else {
-          res.json({ account: 'authorized' })
+          res.json({ account: 'authorized-student' })
         }
       }
       else {
