@@ -76,6 +76,7 @@ monogatari.assets('scenes', {
 	'shop-exterior': 'hiking-shop-exterior.png',
 	'boot-advert': 'boot-advert.png',
 	'shop-interior': 'hiking-shop.png',
+	'driving': 'driving.png',
 	'school': 'school-1.png',
 	'forest-mist': 'forest-mist-1.png',
 	'forest-path': 'forest-path-1.png',
@@ -223,10 +224,11 @@ monogatari.script({
 		"zack Hey {{player.name}}.",
 		"And there's Zack. He knows a lot about camping.",
 		"player What are you guys doing in the park?",
+		'hide character zack with fadeOut',
+		'show character emily happy at right',
 		"emily We're getting some practice in for our big hike.",
 		"player Ok, I'm also excited about it.",
 		"player Maybe you guys could help me pick some gear, I'm on my way to the outdoor equipment store.",
-		'show character emily happy at right with fadeIn',
 		"emily Sure. My dad's pretty experienced with hiking, so I know a few things.",
 		'jump Shop1'
 	],
@@ -247,7 +249,6 @@ monogatari.script({
 		"emily If you get those boots, you won't be able to afford anything else.",
 		"player Yeah, I'd have to rely on what I have already.",
 		'show scene shop-interior with fadeIn',
-		//'show character clerk normal at right with fadeIn',
 		'clerk Hi there {{player.name}}',
 		'clerk What can I get for you?',
 		{
@@ -297,7 +298,12 @@ monogatari.script({
 				'False': "emily Those boots are pretty dorky, but at least you're covered if it rains or gets cold up there."
 			}
 		},
-		'jump Trail1'],
+		'jump Driving'],
+	'Driving': [
+		'show scene driving with fadeIn',
+		"centered Soon enough, the big day came. Emily and her father, Grandpa, Zack, and you all drove to the wilderness.",
+		'jump Trail1'
+	],
 	'Trail1': [
 		'show scene forest-mist with fadeIn',
 		'I AM JUST SKIPPING FORWARD HERE, TO THE FOREST PART.',
