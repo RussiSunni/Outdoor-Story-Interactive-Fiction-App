@@ -1,30 +1,40 @@
+// Middleware 
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
-// var indexRouter = require('./routes/index');
-// var usersRouter = require('./routes/users');
+const mysql = require('mysql');
+const sessions = require('express-session');
 
 var app = express();
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use('/', indexRouter);
-// app.use('/users', usersRouter);
-/* GET home page. */
+// View engine setup.
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
-// Middleware 
-const mysql = require('mysql');
+// Sessions.
+const oneDay = 1000 * 60 * 60 * 24;
+app.use(sessions({
+  secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+  saveUninitialized: true,
+  cookie: { maxAge: oneDay },
+  resave: false
+}));
+
+// A variable to save a session.
+var session =
+{
+  userId: null,
+  userName: null,
+  isAdmin: null
+};
+
 
 /*------------------------------------------
 --------------------------------------------
@@ -54,16 +64,42 @@ conn.connect((err) => {
 
 
 // Routes.
+
+/**
+ * Login screen route.
+ */
 app.get('/', function (req, res, next) {
   res.render('index');
 });
 
-
+/**
+ * Admin screen route.
+ */
 app.get('/admin', function (req, res, next) {
-  res.render('admin-panel');
+  // Check if the user is logged in.
+  if (session.userName && session.isAdmin == 1)
+    res.render('admin-panel');
+
+  // Otherwise, redirect to login page.
+  else
+    res.redirect('/')
+});
+
+/**
+ * Game screen route.
+ */
+app.get('/game', function (req, res, next) {
+  // Check if the user is logged in.
+  if (session.userName)
+    res.render('game', { username: session.userName });
+
+  // Otherwise, redirect to login page.
+  else
+    res.redirect('/')
 });
 
 
+// List users.
 app.get('/api/users', function (req, res, next) {
   res.setHeader('Content-Type', 'application/json');
   let sqlQuery = "SELECT * FROM healthy_lifestyles.users;";
@@ -82,12 +118,6 @@ app.get('/api/users', function (req, res, next) {
 });
 
 
-app.get('/game', function (req, res, next) {
-  var username = req.query.username;
-  res.render('game', { username: username });
-});
-
-
 // Login.
 app.post('/login-attempt', (req, res, next) => {
   res.setHeader('Content-Type', 'application/json');
@@ -100,6 +130,12 @@ app.post('/login-attempt', (req, res, next) => {
       }
       // If record is found.
       else if (results.length > 0) {
+        // Create user session object.
+        session = req.session
+        session.userId = results[0].id
+        session.userName = results[0].username
+        session.isAdmin = results[0].is_admin
+
         if (results[0].is_admin == 1) {
           res.json({ account: 'authorized-admin' })
         }
