@@ -44,9 +44,9 @@ Database Connection
 const conn = mysql.createConnection({
   host: 'localhost',
   user: 'admin',
-  //user: 'root',
+  user: 'root',
   password: 'H3@lthyL1f35tyl3s',
-  //password: 'password',
+  password: 'password',
   database: 'healthy_lifestyles'
 });
 
@@ -73,17 +73,52 @@ app.get('/', function (req, res, next) {
 });
 
 /**
- * Admin screen route.
+ * Admin screen routes.
  */
-app.get('/admin', function (req, res, next) {
+
+
+/**
+ * Users.
+ */
+// List users.
+app.get('/list-users', function (req, res, next) {
   // Check if the user is logged in.
   if (session.userName && session.isAdmin == 1)
-    res.render('admin-panel');
+    res.render('list-users');
 
   // Otherwise, redirect to login page.
   else
     res.redirect('/')
 });
+
+// Show user.
+app.get('/show-user/:id', function (req, res, next) {
+  // Check if the user is logged in.
+  if (session.userName && session.isAdmin == 1) {
+
+    let sqlQuery = `
+    SELECT *
+    FROM healthy_lifestyles.users
+    WHERE healthy_lifestyles.users.id = ` + req.params.id + `;`;
+
+    let query = conn.query(sqlQuery, (err, results) => {
+      try {
+        if (err) {
+          throw err;
+        }
+
+        res.render('show-user', { user: results[0] });
+      } catch (err) {
+        next(err)
+      }
+    });
+  }
+
+  // Otherwise, redirect to login page.
+  else
+    res.redirect('/')
+});
+
 
 /**
  * Game screen route.
@@ -171,9 +206,16 @@ app.post('/login-attempt', (req, res, next) => {
 });
 
 
-app.post('/test', (req, res, next) => {
-  console.log("test111111")
-  let sqlQuery = "INSERT INTO healthy_lifestyles.choices (user_id, choice_001) values (1, 1)";
+app.post('/save-choice', (req, res, next) => {
+  // Get current date.
+  var date_time = new Date();
+  let date = ("0" + date_time.getDate()).slice(-2);
+  let month = ("0" + (date_time.getMonth() + 1)).slice(-2);
+  let year = date_time.getFullYear();
+  var currentDate = year + "-" + month + "-" + date
+
+  // SQL query.
+  let sqlQuery = "INSERT INTO healthy_lifestyles.choices (user_id, date, " + req.body.choiceNumber + ") values (" + session.userId + ",'" + currentDate + "','" + req.body.choice + "')";
   let query = conn.query(sqlQuery, (err, results) => {
     try {
       if (err) {
