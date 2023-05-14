@@ -44,9 +44,9 @@ Database Connection
 const conn = mysql.createConnection({
   host: 'localhost',
   user: 'admin',
-  user: 'root',
+  //user: 'root',
   password: 'H3@lthyL1f35tyl3s',
-  password: 'password',
+  //password: 'password',
   database: 'healthy_lifestyles'
 });
 
@@ -113,6 +113,33 @@ app.get('/show-user/:id', function (req, res, next) {
       }
     });
   }
+});
+
+
+// Show choices.
+app.get('/api/choices/:id', function (req, res, next) {
+  // Check if the user is logged in.
+  if (session.userName && session.isAdmin == 1) {
+    res.setHeader('Content-Type', 'application/json');
+
+    let sqlQuery = `
+    SELECT *
+    FROM healthy_lifestyles.choices
+    WHERE healthy_lifestyles.choices.user_id = ` + req.params.id + `;`;
+
+    let query = conn.query(sqlQuery, (err, results) => {
+      try {
+        if (err) {
+          throw err;
+        }
+        else {
+          res.json(results)
+        }
+      } catch (err) {
+        next(err)
+      }
+    });
+  }
 
   // Otherwise, redirect to login page.
   else
@@ -151,7 +178,6 @@ app.get('/api/users', function (req, res, next) {
     }
   });
 });
-
 
 // Login.
 app.post('/login-attempt', (req, res, next) => {
@@ -205,7 +231,6 @@ app.post('/login-attempt', (req, res, next) => {
   });
 });
 
-
 app.post('/api/save-choice', (req, res, next) => {
   // Get current date.
   var date_time = new Date();
@@ -230,7 +255,7 @@ app.post('/api/save-choice', (req, res, next) => {
   });
 });
 
- 
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
