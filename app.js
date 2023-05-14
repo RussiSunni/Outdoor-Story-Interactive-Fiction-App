@@ -232,6 +232,7 @@ app.post('/login-attempt', (req, res, next) => {
 });
 
 app.post('/api/save-choice', (req, res, next) => {
+
   // Get current date.
   var date_time = new Date();
   let date = ("0" + date_time.getDate()).slice(-2);
@@ -239,8 +240,8 @@ app.post('/api/save-choice', (req, res, next) => {
   let year = date_time.getFullYear();
   var currentDate = year + "-" + month + "-" + date
 
-  // SQL query.
-  let sqlQuery = "INSERT INTO healthy_lifestyles.choices (user_id, date, " + req.body.choiceNumber + ") values (" + session.userId + ",'" + currentDate + "','" + req.body.choice + "')";
+  // SQL query. 
+  let sqlQuery = "INSERT INTO healthy_lifestyles.choices (user_id, choice_001_date, " + req.body.choiceNumber + ") values (" + session.userId + ",'" + currentDate + "','" + req.body.choice + "')";
   let query = conn.query(sqlQuery, (err, results) => {
     try {
       if (err) {
