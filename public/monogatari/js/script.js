@@ -353,7 +353,7 @@ monogatari.script({
 });
 
 function SaveChoice(choiceNumber, choice) {
-	fetch('/save-choice', {
+	fetch('/api/save-choice', {
 		method: 'POST',
 		headers: {
 			"Content-type": "application/json; charset=UTF-8"

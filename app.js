@@ -206,7 +206,7 @@ app.post('/login-attempt', (req, res, next) => {
 });
 
 
-app.post('/save-choice', (req, res, next) => {
+app.post('/api/save-choice', (req, res, next) => {
   // Get current date.
   var date_time = new Date();
   let date = ("0" + date_time.getDate()).slice(-2);
@@ -230,7 +230,7 @@ app.post('/save-choice', (req, res, next) => {
   });
 });
 
-
+ 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
