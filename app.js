@@ -124,8 +124,8 @@ app.get('/api/choices/:id', function (req, res, next) {
 
     let sqlQuery = `
     SELECT *
-    FROM healthy_lifestyles.choices
-    WHERE healthy_lifestyles.choices.user_id = ` + req.params.id + `;`;
+    FROM healthy_lifestyles.user_choices
+    WHERE healthy_lifestyles.user_choices.user_id = ` + req.params.id + `;`;
 
     let query = conn.query(sqlQuery, (err, results) => {
       try {
@@ -232,7 +232,6 @@ app.post('/login-attempt', (req, res, next) => {
 });
 
 app.post('/api/save-choice', (req, res, next) => {
-
   // Get current date.
   var date_time = new Date();
   let date = ("0" + date_time.getDate()).slice(-2);
@@ -241,7 +240,8 @@ app.post('/api/save-choice', (req, res, next) => {
   var currentDate = year + "-" + month + "-" + date
 
   // SQL query. 
-  let sqlQuery = "INSERT INTO healthy_lifestyles.choices (user_id, choice_001_date, " + req.body.choiceNumber + ") values (" + session.userId + ",'" + currentDate + "','" + req.body.choice + "')";
+  let sqlQuery = "INSERT INTO healthy_lifestyles.user_choices (user_id, date, choice_id, choice) values (" + session.userId + ",'" + currentDate + "','" + req.body.choiceId + "','" + req.body.choice + "')";
+
   let query = conn.query(sqlQuery, (err, results) => {
     try {
       if (err) {

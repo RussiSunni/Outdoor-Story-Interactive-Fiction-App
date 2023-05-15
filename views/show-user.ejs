@@ -56,12 +56,16 @@
                 return data.json();
             })
             .then(choices => {
+                // Only most recent choice will show.            
                 for (let i = 0; i < choices.length; i++) {
-                    document.getElementById("choice1").innerHTML = choices[i].choice_001;
-                    document.getElementById("choice1Date").innerHTML = choices[i].choice_001_date;
-
-                    document.getElementById("choice2").innerHTML = choices[i].choice_002;
-                    document.getElementById("choice2Date").innerHTML = choices[i].choice_002_date;
+                    if (choices[i].choice_id == 1) {
+                        document.getElementById("choice1").innerHTML = choices[i].choice;
+                        document.getElementById("choice1Date").innerHTML = choices[i].date;
+                    }
+                    if (choices[i].choice_id == 2) {
+                        document.getElementById("choice2").innerHTML = choices[i].choice;
+                        document.getElementById("choice2Date").innerHTML = choices[i].date;
+                    }
                 }
             });
 

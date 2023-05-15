@@ -193,7 +193,7 @@ monogatari.script({
 					'Text': 'donuts',
 					"onChosen": function () {
 						monogatari.storage().first_meal = "Donuts";
-						SaveChoice("choice_001", "Donuts");
+						SaveChoice(1, "Donuts");
 					},
 					'Do': 'Yum'
 				},
@@ -201,7 +201,7 @@ monogatari.script({
 					'Text': 'a sandwhich',
 					"onChosen": function () {
 						monogatari.storage().first_meal = "Sandwich"
-						SaveChoice("choice_001", "Sandwich");
+						SaveChoice(1, "Sandwich");
 					},
 					'Do': 'Yum'
 				},
@@ -259,7 +259,7 @@ monogatari.script({
 					'Text': "I'd like a pair of those boots in the window please.",
 					"onChosen": function () {
 						monogatari.storage().equipment = "Expensive Boots";
-						SaveChoice("choice_002", "Expensive Boots");
+						SaveChoice(2, "Expensive Boots");
 					},
 					'Do': 'clerk Ok, here is your gear. Hope you have a good trip.',
 				},
@@ -267,7 +267,7 @@ monogatari.script({
 					'Text': 'I need some relatively cheap boots, a rain jacket, and a thermal top, please.',
 					"onChosen": function () {
 						monogatari.storage().equipment = "Good Value"
-						SaveChoice("choice_002", "Good Value");
+						SaveChoice(2, "Good Value");
 					},
 					'Do': 'clerk Ok, here is your gear. Hope you have a good trip.',
 				},
@@ -352,13 +352,13 @@ monogatari.script({
 
 });
 
-function SaveChoice(choiceNumber, choice) {
+function SaveChoice(choiceId, choice) {
 	fetch('/api/save-choice', {
 		method: 'POST',
 		headers: {
 			"Content-type": "application/json; charset=UTF-8"
 		},
-		body: JSON.stringify({ choiceNumber: choiceNumber, choice: choice })
+		body: JSON.stringify({ choiceId: choiceId, choice: choice })
 	});
 };
 
