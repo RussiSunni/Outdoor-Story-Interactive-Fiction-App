@@ -27,15 +27,6 @@ app.use(sessions({
   resave: false
 }));
 
-// A variable to save a session.
-var session =
-{
-  userId: null,
-  userName: null,
-  isAdmin: null
-};
-
-
 /*------------------------------------------
 --------------------------------------------
 Database Connection
@@ -64,122 +55,14 @@ conn.connect((err) => {
 
 
 // Routes.
-
 /**
- * Login screen route.
+ * Login route.
  */
 app.get('/', function (req, res, next) {
   res.render('index');
 });
 
-/**
- * Admin screen routes.
- */
-
-
-/**
- * Users.
- */
-// List users.
-app.get('/list-users', function (req, res, next) {
-  // Check if the user is logged in.
-  if (session.userName && session.isAdmin == 1)
-    res.render('list-users');
-
-  // Otherwise, redirect to login page.
-  else
-    res.redirect('/')
-});
-
-// Show user.
-app.get('/show-user/:id', function (req, res, next) {
-  // Check if the user is logged in.
-  if (session.userName && session.isAdmin == 1) {
-
-    let sqlQuery = `
-    SELECT *
-    FROM healthy_lifestyles.users
-    WHERE healthy_lifestyles.users.id = ` + req.params.id + `;`;
-
-    let query = conn.query(sqlQuery, (err, results) => {
-      try {
-        if (err) {
-          throw err;
-        }
-
-        res.render('show-user', { user: results[0] });
-      } catch (err) {
-        next(err)
-      }
-    });
-  }
-});
-
-
-// Show choices.
-app.get('/api/choices/:id', function (req, res, next) {
-  // Check if the user is logged in.
-  if (session.userName && session.isAdmin == 1) {
-    res.setHeader('Content-Type', 'application/json');
-
-    let sqlQuery = `
-    SELECT *
-    FROM healthy_lifestyles.user_choices
-    WHERE healthy_lifestyles.user_choices.user_id = ` + req.params.id + `;`;
-
-    let query = conn.query(sqlQuery, (err, results) => {
-      try {
-        if (err) {
-          throw err;
-        }
-        else {
-          res.json(results)
-        }
-      } catch (err) {
-        next(err)
-      }
-    });
-  }
-
-  // Otherwise, redirect to login page.
-  else
-    res.redirect('/')
-});
-
-
-/**
- * Game screen route.
- */
-app.get('/game', function (req, res, next) {
-  // Check if the user is logged in.
-  if (session.userName)
-    res.render('game', { username: session.userName });
-
-  // Otherwise, redirect to login page.
-  else
-    res.redirect('/')
-});
-
-
-// List users.
-app.get('/api/users', function (req, res, next) {
-  res.setHeader('Content-Type', 'application/json');
-  let sqlQuery = "SELECT * FROM healthy_lifestyles.users;";
-  let query = conn.query(sqlQuery, (err, results) => {
-    try {
-      if (err) {
-        throw err;
-      }
-      else {
-        res.json(results);
-      }
-    } catch (err) {
-      next(err)
-    }
-  });
-});
-
-// Login.
+// Login API.
 app.post('/api/login-attempt', (req, res, next) => {
   res.setHeader('Content-Type', 'application/json');
   // Execute SQL query that'll select the account from the database based on the specified username and password.
@@ -192,10 +75,10 @@ app.post('/api/login-attempt', (req, res, next) => {
       // If record is found.
       else if (results.length > 0) {
         // Create user session object.
-        session = req.session
-        session.userId = results[0].id
-        session.userName = results[0].username
-        session.isAdmin = results[0].is_admin
+        // session = req.session
+        req.session.userId = results[0].id
+        req.session.userName = results[0].username
+        req.session.isAdmin = results[0].is_admin
 
         if (results[0].is_admin == 1) {
           res.json({ account: 'authorized-admin' })
@@ -231,29 +114,149 @@ app.post('/api/login-attempt', (req, res, next) => {
   });
 });
 
+/**
+ * Admin screen routes.
+ */
+
+/**
+ * Users.
+ */
+// List users route.
+app.get('/list-users', function (req, res, next) {
+  // Check if the user is logged in and an admin.
+  var session = req.session;
+  if (session.userName && session.isAdmin == 1)
+    res.render('list-users');
+  // Otherwise, redirect to login page.
+  else
+    res.redirect('/')
+});
+
+// List users API.
+app.get('/api/users', function (req, res, next) {
+  // Check if the user is logged in and an admin.
+  var session = req.session;
+  if (session.userName && session.isAdmin == 1) {
+    res.setHeader('Content-Type', 'application/json');
+    let sqlQuery = "SELECT * FROM healthy_lifestyles.users;";
+    let query = conn.query(sqlQuery, (err, results) => {
+      try {
+        if (err) {
+          throw err;
+        }
+        else {
+          res.json(results);
+        }
+      } catch (err) {
+        next(err)
+      }
+    });
+  }
+});
+
+// Show user route and API.
+app.get('/show-user/:id', function (req, res, next) {
+  // Check if the user is logged in and an admin.
+  var session = req.session;
+  if (session.userName && session.isAdmin == 1) {
+    let sqlQuery = `
+    SELECT *
+    FROM healthy_lifestyles.users
+    WHERE healthy_lifestyles.users.id = ` + req.params.id + `;`;
+
+    let query = conn.query(sqlQuery, (err, results) => {
+      try {
+        if (err) {
+          throw err;
+        }
+
+        res.render('show-user', { user: results[0] });
+      } catch (err) {
+        next(err)
+      }
+    });
+  }
+});
+
+
+/**
+ * Choices.
+ */
+// Show choices API.
+app.get('/api/choices/:id', function (req, res, next) {
+  // Check if the user is logged in and an admin.
+  var session = req.session;
+  if (session.userName && session.isAdmin == 1) {
+    res.setHeader('Content-Type', 'application/json');
+
+    let sqlQuery = `
+    SELECT *
+    FROM healthy_lifestyles.user_choices
+    WHERE healthy_lifestyles.user_choices.user_id = ` + req.params.id + `;`;
+
+    let query = conn.query(sqlQuery, (err, results) => {
+      try {
+        if (err) {
+          throw err;
+        }
+        else {
+          res.json(results)
+        }
+      } catch (err) {
+        next(err)
+      }
+    });
+  }
+
+  // Otherwise, redirect to login page.
+  else
+    res.redirect('/')
+});
+
+
+/**
+ * Game screen route.
+ */
+// Game Route.
+app.get('/game', function (req, res, next) {
+  // Check if the user is logged in.
+  var session = req.session;
+  if (session.userName)
+    res.render('game', { username: session.userName });
+
+  // Otherwise, redirect to login page.
+  else
+    res.redirect('/')
+});
+
+// Save Choice API.
 app.post('/api/save-choice', (req, res, next) => {
-  // Get current date.
-  var date_time = new Date();
-  let date = ("0" + date_time.getDate()).slice(-2);
-  let month = ("0" + (date_time.getMonth() + 1)).slice(-2);
-  let year = date_time.getFullYear();
-  var currentDate = year + "-" + month + "-" + date
+  // Check if the user is logged in.
+  var session = req.session;
+  if (session.userName) {
+    // Get current date.
+    var date_time = new Date();
+    let date = ("0" + date_time.getDate()).slice(-2);
+    let month = ("0" + (date_time.getMonth() + 1)).slice(-2);
+    let year = date_time.getFullYear();
+    var currentDate = year + "-" + month + "-" + date
 
-  // SQL query. 
-  let sqlQuery = "INSERT INTO healthy_lifestyles.user_choices (user_id, date, choice_id, choice) values (" + session.userId + ",'" + currentDate + "','" + req.body.choiceId + "','" + req.body.choice + "')";
+    // SQL query. 
+    let sqlQuery = "INSERT INTO healthy_lifestyles.user_choices (user_id, date, choice_id, choice) values (" + session.userId + ",'" + currentDate + "','" + req.body.choiceId + "','" + req.body.choice + "')";
 
-  let query = conn.query(sqlQuery, (err, results) => {
-    try {
-      if (err) {
-        throw err;
+    let query = conn.query(sqlQuery, (err, results) => {
+      try {
+        if (err) {
+          throw err;
+        }
+        else {
+          res.end();
+        }
+      } catch (err) {
+        next(err)
       }
-      else {
-        res.end();
-      }
-    } catch (err) {
-      next(err)
-    }
-  });
+    });
+  }
 });
 
 
