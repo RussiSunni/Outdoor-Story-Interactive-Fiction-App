@@ -44,9 +44,9 @@ Database Connection
 const conn = mysql.createConnection({
   host: 'localhost',
   user: 'admin',
-  //user: 'root',
+  user: 'root',
   password: 'H3@lthyL1f35tyl3s',
-  //password: 'password',
+  password: 'password',
   database: 'healthy_lifestyles'
 });
 
@@ -180,7 +180,7 @@ app.get('/api/users', function (req, res, next) {
 });
 
 // Login.
-app.post('/login-attempt', (req, res, next) => {
+app.post('/api/login-attempt', (req, res, next) => {
   res.setHeader('Content-Type', 'application/json');
   // Execute SQL query that'll select the account from the database based on the specified username and password.
   let sqlQuery1 = "SELECT * FROM healthy_lifestyles.users WHERE healthy_lifestyles.users.username = '" + req.body.username + "' AND healthy_lifestyles.users.password = '" + req.body.password + "';";

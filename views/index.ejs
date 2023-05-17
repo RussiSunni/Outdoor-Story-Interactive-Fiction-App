@@ -81,7 +81,7 @@
                         password: password,
                     })
             };
-            var url = '/login-attempt';
+            var url = '/api/login-attempt';
             fetch(url, requestOptions)
                 .then(function (response) {
                     return response.json()
