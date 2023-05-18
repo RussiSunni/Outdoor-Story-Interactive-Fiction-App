@@ -33,9 +33,9 @@ Database Connection
 const conn = mysql.createConnection({
   host: 'localhost',
   user: 'admin',
-  user: 'root',
+  //user: 'root',
   password: 'H3@lthyL1f35tyl3s',
-  password: 'password',
+  //password: 'password',
   database: 'healthy_lifestyles'
 });
 
@@ -198,6 +198,12 @@ app.get('/api/choices/:id', function (req, res, next) {
           throw err;
         }
         else {
+          // Remove time from date time.
+          for (let i = 0; i < results.length; i++) {
+            var dateTime = results[i].date.toString();
+            var date = dateTime.substr(4, 11);
+            results[i].date = date;
+          }
           res.json(results)
         }
       } catch (err) {
