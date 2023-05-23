@@ -33,9 +33,9 @@ Database Connection
 const conn = mysql.createConnection({
   host: 'localhost',
   user: 'admin',
-  //user: 'root',
+  user: 'root',
   password: 'H3@lthyL1f35tyl3s',
-  //password: 'password',
+  password: 'password',
   database: 'healthy_lifestyles'
 });
 
@@ -57,7 +57,7 @@ conn.connect((err) => {
  * Login route.
  */
 app.get('/', function (req, res, next) {
-  res.render('index');
+  res.render('login');
 });
 
 // Login API.
@@ -110,6 +110,48 @@ app.post('/api/login-attempt', (req, res, next) => {
       next(err)
     }
   });
+});
+
+
+// Create account route.
+app.get('/create-account', function (req, res, next) {
+  res.render('create-account');
+});
+
+
+// Create account API.
+app.post('/api/create-account', (req, res, next) => {
+  //res.setHeader('Content-Type', 'application/json');
+  // Check if username already exits.
+  let sqlQuery1 = "SELECT * FROM users WHERE users.username = '" + req.body.username + "';";
+  let query1 = conn.query(sqlQuery1, (err, results) => {
+    if (results.length > 0) {
+      res.json({ notification: 'username already exists' });
+    }
+    else {
+      // Check if email address already exits.
+      let sqlQuery2 = "SELECT * FROM users WHERE users.email = '" + req.body.email + "';";
+      let query2 = conn.query(sqlQuery2, (err, results) => {
+        if (results.length > 0) {
+          res.json({ notification: 'email address already exists' });
+        }
+        else {
+          // Create account and redirect to login screen.
+          let data = { first_name: req.body.first_name, last_name: req.body.last_name, username: req.body.username, password: req.body.password, email: req.body.email, is_admin: 0, start_date: req.body.current_date };
+          let sqlQuery3 = "INSERT INTO users SET ?";
+          let query = conn.query(sqlQuery3, data, (err, results) => {
+            if (err) {
+              throw err;
+            }
+            else {
+              res.json({ notification: 'account created' });
+              res.end();
+            }
+          });
+        }
+      });
+    }
+  })
 });
 
 /**

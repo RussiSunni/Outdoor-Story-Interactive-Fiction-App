@@ -4,34 +4,31 @@
 <%- include('partials/head'); %>
 
     <body class="login-page text-center">
-        <div class="container mt-3">
+        <div class="container form-signin my-1">
             <h1>Create Account</h1>
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="mb-3">
-                        <label for="first_name" class="form-label">First Name</label>
-                        <input id="first_name" type="text" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label for="last_name" class="form-label">Last Name</label>
-                        <input id="last_name" type="text" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Username</label>
-                        <input id="username" type="text" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Password</label>
-                        <input id="password" type="password" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Email address</label>
-                        <input id="email" type="email" class="form-control" @blur="ValidateEmail">
-                    </div>
-                    <button class="btn btn-dark" onclick="Submit()">Submit</button>
-                    <!-- <button class="btn btn-dark" @click="ValidateForm()">Submit</button> -->
-                </div>
+            <div class="mb-3">
+                <label for="first_name" class="form-label">First Name</label>
+                <input id="first_name" type="text" class="form-control">
             </div>
+            <div class="mb-3">
+                <label for="last_name" class="form-label">Last Name</label>
+                <input id="last_name" type="text" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                <input id="username" type="text" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input id="password" type="password" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Email address</label>
+                <input id="email" type="email" class="form-control" @blur="ValidateEmail">
+            </div>
+            <button class="btn btn-dark" onclick="Submit()">Submit</button>
+            <!-- <button class="btn btn-dark" @click="ValidateForm()">Submit</button> -->
+
         </div>
     </body>
     <script>
@@ -43,6 +40,13 @@
             let password = document.getElementById("password").value;
             let email = document.getElementById("email").value;
 
+            // Get current date.
+            var date_time = new Date();
+            let date = ("0" + date_time.getDate()).slice(-2);
+            let month = ("0" + (date_time.getMonth() + 1)).slice(-2);
+            let year = date_time.getFullYear();
+            var currentDate = year + "-" + month + "-" + date;
+
             const requestOptions = {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -52,7 +56,8 @@
                         password: password,
                         first_name: firstName,
                         last_name: lastName,
-                        email: email
+                        email: email,
+                        current_date: currentDate
                     })
             };
             var url = '/api/create-account';
@@ -61,7 +66,15 @@
                     return response.json()
                 })
                 .then(function (data) {
-                    window.location.replace("/list-users");
+                    // Let user know if username or email address is already taken.
+                    if (data.notification == "username already exists" ||
+                        data.notification == "email address already exists") {
+                        alert(data.notification);
+                    }
+                    else if (data.notification == "account created") {
+                        alert(data.notification);
+                        window.location.href = '../';
+                    }
                 })
         }
 
