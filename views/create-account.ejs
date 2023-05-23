@@ -26,12 +26,45 @@
                 <label class="form-label">Email address</label>
                 <input id="email" type="email" class="form-control" @blur="ValidateEmail">
             </div>
-            <button class="btn btn-dark" onclick="Submit()">Submit</button>
-            <!-- <button class="btn btn-dark" @click="ValidateForm()">Submit</button> -->
-
+            <button class="btn btn-dark" onclick="ValidateForm()">Submit</button>
         </div>
     </body>
     <script>
+        function ValidateForm() {
+            let firstName = document.getElementById("first_name").value;
+            let lastName = document.getElementById("last_name").value;
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+            let email = document.getElementById("email").value;
+
+            if (firstName == "" || firstName == null) {
+                alert("Please add a first name.")
+            }
+            else if (lastName == "" || lastName == null) {
+                alert("Please add a last name.")
+            }
+            else if (username == "" || username == null) {
+                alert("Please add a username.")
+            }
+            else if (password == "" || password == null) {
+                alert("Please add a password.")
+            }
+            else if (email == "" || email == null) {
+                alert("Please add an email address.")
+            }
+            else {
+                this.ValidateEmail();
+            }
+        }
+
+        function ValidateEmail() {
+            let email = document.getElementById("email").value;
+            if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+                Submit()
+            } else {
+                alert("Please enter a valid email address")
+            }
+        }
 
         function Submit() {
             let firstName = document.getElementById("first_name").value;
