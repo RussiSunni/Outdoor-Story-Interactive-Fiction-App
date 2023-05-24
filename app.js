@@ -125,31 +125,40 @@ app.post('/api/create-account', (req, res, next) => {
   // Check if username already exits.
   let sqlQuery1 = "SELECT * FROM users WHERE users.username = '" + req.body.username + "';";
   let query1 = conn.query(sqlQuery1, (err, results) => {
-    if (results.length > 0) {
-      res.json({ notification: 'username already exists' });
-    }
-    else {
-      // Check if email address already exits.
-      let sqlQuery2 = "SELECT * FROM users WHERE users.email = '" + req.body.email + "';";
-      let query2 = conn.query(sqlQuery2, (err, results) => {
+    try {
+      if (err) {
+        throw err;
+      }
+      else {
         if (results.length > 0) {
-          res.json({ notification: 'email address already exists' });
+          res.json({ notification: 'username already exists' });
         }
         else {
-          // Create account and redirect to login screen.
-          let data = { first_name: req.body.first_name, last_name: req.body.last_name, username: req.body.username, password: req.body.password, email: req.body.email, is_admin: 0, start_date: req.body.current_date };
-          let sqlQuery3 = "INSERT INTO users SET ?";
-          let query = conn.query(sqlQuery3, data, (err, results) => {
-            if (err) {
-              throw err;
+          // Check if email address already exits.
+          let sqlQuery2 = "SELECT * FROM users WHERE users.email = '" + req.body.email + "';";
+          let query2 = conn.query(sqlQuery2, (err, results) => {
+            if (results.length > 0) {
+              res.json({ notification: 'email address already exists' });
             }
             else {
-              res.json({ notification: 'account created' });
-              res.end();
+              // Create account and redirect to login screen.
+              let data = { first_name: req.body.first_name, last_name: req.body.last_name, username: req.body.username, password: req.body.password, email: req.body.email, is_admin: 0, start_date: req.body.current_date };
+              let sqlQuery3 = "INSERT INTO users SET ?";
+              let query = conn.query(sqlQuery3, data, (err, results) => {
+                if (err) {
+                  throw err;
+                }
+                else {
+                  res.json({ notification: 'account created' });
+                  res.end();
+                }
+              });
             }
           });
         }
-      });
+      }
+    } catch (err) {
+      next(err)
     }
   })
 });
