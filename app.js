@@ -155,9 +155,18 @@ app.post('/api/create-account', (req, res, next) => {
 });
 
 /**
- * Admin screen routes.
+ * Admin screen routes -----------------------------------.
  */
-
+// Admin panel route.
+app.get('/admin', function (req, res, next) {
+  // Check if the user is logged in and an admin.
+  var session = req.session;
+  if (session.userName && session.isAdmin == 1)
+    res.render('admin-panel');
+  // Otherwise, redirect to login page.
+  else
+    res.redirect('/')
+});
 /**
  * Users.
  */

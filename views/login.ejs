@@ -78,7 +78,7 @@
                     })
                     .then(function (data) {
                         if (data.account == "authorized-admin") {
-                            window.location.replace("/list-users");
+                            window.location.replace("/admin");
                         }
                         else if (data.account == "authorized-student") {
                             window.location.replace("/game?username=" + username);
