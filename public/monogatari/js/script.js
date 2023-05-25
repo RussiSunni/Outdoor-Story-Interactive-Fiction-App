@@ -81,6 +81,7 @@ monogatari.assets('scenes', {
 	'shop-interior': 'hiking-shop.png',
 	'driving': 'driving.png',
 	'school': 'school-1.png',
+	'trail-beginning': 'trail-beginning.png',
 	'forest-mist': 'forest-mist-1.png',
 	'forest-path': 'forest-path-1.png',
 	'deep-forest': 'deep-forest-1.png'
@@ -108,6 +109,18 @@ monogatari.characters({
 			//angry: 'normal.png',
 			//happy: 'happy.png',
 			normal: 'normal.png',
+			//	sad: 'sad.png',
+			//	surprised: 'surprised.png'
+		}
+	},
+	'grandpa': {
+		name: 'Grandpa',
+		color: '#ffff00',
+		directory: 'grandpa',
+		sprites: {
+			//angry: 'normal.png',
+			happy: 'happy.png',
+			//normal: 'normal.png',
 			//	sad: 'sad.png',
 			//	surprised: 'surprised.png'
 		}
@@ -295,6 +308,13 @@ monogatari.script({
 	'Driving': [
 		'show scene driving with fadeIn',
 		"centered Soon enough, the big day came. Emily and her father, Grandpa, Zack, and you all drove to the wilderness.",
+		'jump TrailBeginning'
+	],
+	'TrailBeginning': [
+		'show scene trail-beginning with fadeIn',
+		'show character grandpa happy at right with fadeIn',
+		'grandpa Finally here!',
+		'grandpa Now you guys follow close and dont get lost',
 		'jump Trail1'
 	],
 	'Trail1': [
@@ -331,12 +351,19 @@ monogatari.script({
 		// 'show character sam happy at right with fadeIn',
 		// 'show character zack happy at left with fadeIn',
 		"zack aww, you're no fun at all.",
-		"sam guys, wait up, I need to tie my shoelace."
+		"sam guys, wait up, I need to tie my shoelace.",
+		"ok sure",
+		"sam ok, all done.",
+		"zack hey which path did they take?",
+		"zack and sheesh Sam, how long does it take you to tie your shoes?",
+		"sam sorry, these are new",
+		"sam well, Im pretty sure it is this way",
 	],
 	'DeepForest1': [
 		'show scene deep-forest with fadeIn',
-		// 'show character sam happy at right with fadeIn',
-		// 'show character zack happy at left with fadeIn',
+		'zack woah, I think we are lost guys',
+		'sam yeah, but this place is beautiful',
+		'zack and it will be dark soon'
 	],
 
 });
