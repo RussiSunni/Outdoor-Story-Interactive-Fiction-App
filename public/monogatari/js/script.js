@@ -36,7 +36,10 @@ monogatari.assets('gallery', {
 
 // Define the music used in the game.
 monogatari.assets('music', {
-
+	'menuTrack': 'menuTrack.mp3',
+	'intro': 'introTrack.mp3',
+	'park': 'parkTrack.mp3',
+	'shop': 'shopTrack.mp3'
 });
 
 // Define the voice files used in the game.
@@ -174,6 +177,7 @@ monogatari.characters({
 monogatari.script({
 	// The game starts here.
 	'Start': [
+		'play music intro with fade 1',
 		'show scene apartment with fadeIn',
 		"Our home.",
 		"The big and bustling city.",
@@ -212,8 +216,10 @@ monogatari.script({
 		"player I'm so excited. Finally, a real adventure.",
 		"I'm going to go get the stuff right now.",
 		"I'll cut across the park.",
+		'stop music intro with fade 1',
 		'jump Park'],
 	'Park': [
+		'play music park with fade 1',
 		'show scene park-entrance with fadeIn',
 		'Nice day',
 		'show scene park with fadeIn',
@@ -232,9 +238,11 @@ monogatari.script({
 		"player Ok, I'm also excited about it.",
 		"player Maybe you guys could help me pick some gear, I'm on my way to the outdoor equipment store.",
 		"emily Sure. My dad's pretty experienced with hiking, so I know a few things.",
+		'stop music park with fade 1',
 		'jump Shop1'
 	],
 	'Shop1': [
+		'play music shop with fade 1',
 		'show scene shop-exterior with fadeIn',
 		{
 			'Conditional': {
@@ -273,26 +281,6 @@ monogatari.script({
 				},
 			},
 		},
-		// 'BrandName': [
-		// 	'player If I buy the cool brand name clothes, I wont have enough money to get everything.',
-		// 	{
-		// 		'Choice': {
-		// 			'BrandName': {
-		// 				'Text': "It's ok, I want those brand names.",
-		// 				"onChosen": function () { test() },
-		// 				'Do': 'jump Shop2',
-		// 				'Save':
-		// 					monogatari.storage().player.equipment = "Brand Name",
-		// 			},
-		// 			'ChangeMind': {
-		// 				'Text': 'Ask about good value products.',
-		// 				'Do': 'jump Shop2',
-		// 				// 'Save':
-		// 				// 	monogatari.storage().player.equipment = "Good Value"
-		// 			},
-		// 		}
-		// 	}
-		// ],
 		{
 			'Conditional': {
 				'Condition': function () {
@@ -302,6 +290,7 @@ monogatari.script({
 				'False': "emily Those boots are pretty dorky, but at least you're covered if it rains or gets cold up there."
 			}
 		},
+		'stop music shop with fade 1',
 		'jump Driving'],
 	'Driving': [
 		'show scene driving with fadeIn',
