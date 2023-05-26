@@ -82,6 +82,8 @@ monogatari.assets('scenes', {
 	'driving': 'driving.png',
 	'school': 'school-1.png',
 	'trail-beginning': 'trail-beginning.png',
+	'trail-2': 'trail-2.png',
+	'trail-split': 'trail-split.jpg',
 	'forest-mist': 'forest-mist-1.png',
 	'forest-path': 'forest-path-1.png',
 	'deep-forest': 'deep-forest-1.png'
@@ -307,7 +309,7 @@ monogatari.script({
 		'jump Driving'],
 	'Driving': [
 		'show scene driving with fadeIn',
-		"centered Soon enough, the big day came. Emily and her father, Grandpa, Zack, and you all drove to the wilderness.",
+		"Soon enough, the big day came. Emily and her father, Grandpa, Zack, and you all drove to the wilderness.",
 		'jump TrailBeginning'
 	],
 	'TrailBeginning': [
@@ -315,50 +317,62 @@ monogatari.script({
 		'show character grandpa happy at right with fadeIn',
 		'grandpa Finally here!',
 		'grandpa Now you guys follow close and dont get lost',
-		'jump Trail1'
+		'show scene trail-2 with fadeIn',
+		'sam Uh guys, I need to tie my shoelaces.',
+		"zack No problem Sam, we'll wait with you.",
+		// * Could be a choice here.
+		"sam Shouldn't ask Gramps to wait up for us?",
+		"zack Nah, the trail is simple, we'll catch up easily.",
+		'jump TrailSplit'
 	],
-	'Trail1': [
-		'show scene forest-mist with fadeIn',
-		'I AM JUST SKIPPING FORWARD HERE, TO THE FOREST PART.',
-		'show image butterfly with fadeIn',
-		// 'show character sam happy at right with fadeIn',
-		// 'show character zack happy at left with fadeIn',
-		"sam Wow, it's gotten so misty.",
-		'zack Hey guys, check that butterfly!',
-		"zack It's huge.",
-		"sam Is that a birdwing butterfly?",
-		"zack How should I know.",
-		"sam Wow, it looks like a Queen Alexandra's birdwing.",
-		"zack Lets follow it.",
-		"sam Yeah, I've never seen one for real before.",
-		"Uh guys, that means we will leave the path.",
-		"We could get lost in the deep forest.",
-		{
-			'Choice': {
-				'LeavePath': {
-					'Text': "Ok, let's follow it. This is a once in a lifetime chance.",
-					'Do': 'jump DeepForest1',
-				},
-				'StayOnPath': {
-					'Text': 'Guys, we said we would stay on the path. You know what XYZ said about getting lost.',
-					'Do': 'jump Trail2',
-				},
-			},
-		},
+	'TrailSplit': [
+		'show scene trail-split with fadeIn',
+		'sam Ah shoot, the trail splits.',
+		'zack I wonder which way Gramps went.',
+		// * Could be a choice/branch here.
+		"zack Let's take the left way, it looks right to me.",
+		'jump DeepForest1'
 	],
-	'Trail2': [
-		'show scene forest-path with fadeIn',
-		// 'show character sam happy at right with fadeIn',
-		// 'show character zack happy at left with fadeIn',
-		"zack aww, you're no fun at all.",
-		"sam guys, wait up, I need to tie my shoelace.",
-		"ok sure",
-		"sam ok, all done.",
-		"zack hey which path did they take?",
-		"zack and sheesh Sam, how long does it take you to tie your shoes?",
-		"sam sorry, these are new",
-		"sam well, Im pretty sure it is this way",
-	],
+	// 'Trail1': [
+	// 	'show scene forest-mist with fadeIn',
+	// 	'I AM JUST SKIPPING FORWARD HERE, TO THE FOREST PART.',
+	// 	'show image butterfly with fadeIn',
+	// 	// 'show character sam happy at right with fadeIn',
+	// 	// 'show character zack happy at left with fadeIn',
+	// 	"sam Wow, it's gotten so misty.",
+	// 	'zack Hey guys, check that butterfly!',
+	// 	"zack It's huge.",
+	// 	"sam Is that a birdwing butterfly?",
+	// 	"zack How should I know.",
+	// 	"sam Wow, it looks like a Queen Alexandra's birdwing.",
+	// 	"zack Lets follow it.",
+	// 	"sam Yeah, I've never seen one for real before.",
+	// 	"Uh guys, that means we will leave the path.",
+	// 	"We could get lost in the deep forest.",
+	// 	{
+	// 		'Choice': {
+	// 			'LeavePath': {
+	// 				'Text': "Ok, let's follow it. This is a once in a lifetime chance.",
+	// 				'Do': 'jump DeepForest1',
+	// 			},
+	// 			'StayOnPath': {
+	// 				'Text': 'Guys, we said we would stay on the path. You know what XYZ said about getting lost.',
+	// 				'Do': 'jump Trail2',
+	// 			},
+	// 		},
+	// 	},
+	// ],
+	// 'Trail2': [
+	// 	'show scene forest-path with fadeIn',
+	// 	"zack aww, you're no fun at all.",
+	// 	"sam guys, wait up, I need to tie my shoelace.",
+	// 	"ok sure",
+	// 	"sam ok, all done.",
+	// 	"zack hey which path did they take?",
+	// 	"zack and sheesh Sam, how long does it take you to tie your shoes?",
+	// 	"sam sorry, these are new",
+	// 	"sam well, Im pretty sure it is this way",
+	// ],
 	'DeepForest1': [
 		'show scene deep-forest with fadeIn',
 		'zack woah, I think we are lost guys',
