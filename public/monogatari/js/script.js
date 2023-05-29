@@ -85,7 +85,7 @@ monogatari.assets('scenes', {
 	'trail-2': 'trail-2.png',
 	'trail-split': 'trail-split.jpg',
 	'forest-mist': 'forest-mist-1.png',
-	'forest-path': 'forest-path-1.png',
+	'forest-path-1': 'forest-path-1.png',
 	'deep-forest': 'deep-forest-1.png'
 });
 
@@ -318,36 +318,33 @@ monogatari.script({
 		'grandpa Finally here!',
 		'grandpa Now you guys follow close and dont get lost',
 		'show scene trail-2 with fadeIn',
-		'sam Uh guys, I need to tie my shoelaces.',
-		"zack No problem Sam, we'll wait with you.",
+		'emily Uh guys, I need to tie my shoelaces.',
+		"zack No problem Emily, we'll wait with you.",
 		// * Could be a choice here.
-		"sam Shouldn't ask Gramps to wait up for us?",
+		"emily Shouldn't ask Gramps to wait up for us?",
 		"zack Nah, the trail is simple, we'll catch up easily.",
 		'jump TrailSplit'
 	],
 	'TrailSplit': [
 		'show scene trail-split with fadeIn',
-		'sam Ah shoot, the trail splits.',
+		'emily Ah shoot, the trail splits.',
 		'zack I wonder which way Gramps went.',
 		// * Could be a choice/branch here.
 		"zack Let's take the left way, it looks right to me.",
+		'show scene forest-path-1 with fadeIn',
+		'zack Gramps must be just ahead, over that rise.',
+		"emily We better hurry to catch him, it's getting dark.",
+		'show scene trail-split with fadeIn',
+		'show character emily happy at right with fadeIn',
+		'emily Ah shoot, the trail splits again!',
+		'show character zack happy at left with fadeIn',
+		'zack And its almost completely dark.',
+		'zack Whoa!',
+		'emily Hey Zack, are you ok?',
+		"emily I think we should stop for the night. We're tired and its dark. Someone is going to get hurt",
 		'jump DeepForest1'
 	],
 	// 'Trail1': [
-	// 	'show scene forest-mist with fadeIn',
-	// 	'I AM JUST SKIPPING FORWARD HERE, TO THE FOREST PART.',
-	// 	'show image butterfly with fadeIn',
-	// 	// 'show character sam happy at right with fadeIn',
-	// 	// 'show character zack happy at left with fadeIn',
-	// 	"sam Wow, it's gotten so misty.",
-	// 	'zack Hey guys, check that butterfly!',
-	// 	"zack It's huge.",
-	// 	"sam Is that a birdwing butterfly?",
-	// 	"zack How should I know.",
-	// 	"sam Wow, it looks like a Queen Alexandra's birdwing.",
-	// 	"zack Lets follow it.",
-	// 	"sam Yeah, I've never seen one for real before.",
-	// 	"Uh guys, that means we will leave the path.",
 	// 	"We could get lost in the deep forest.",
 	// 	{
 	// 		'Choice': {
@@ -362,22 +359,17 @@ monogatari.script({
 	// 		},
 	// 	},
 	// ],
-	// 'Trail2': [
-	// 	'show scene forest-path with fadeIn',
-	// 	"zack aww, you're no fun at all.",
-	// 	"sam guys, wait up, I need to tie my shoelace.",
-	// 	"ok sure",
-	// 	"sam ok, all done.",
-	// 	"zack hey which path did they take?",
-	// 	"zack and sheesh Sam, how long does it take you to tie your shoes?",
-	// 	"sam sorry, these are new",
-	// 	"sam well, Im pretty sure it is this way",
+
 	// ],
 	'DeepForest1': [
 		'show scene deep-forest with fadeIn',
 		'zack woah, I think we are lost guys',
-		'sam yeah, but this place is beautiful',
-		'zack and it will be dark soon'
+		'emily yeah, but this place is beautiful',
+
+
+		// possibly a choice here as to what to do.
+		// decide to camp.
+		// happy to be away from school.
 	],
 
 });
