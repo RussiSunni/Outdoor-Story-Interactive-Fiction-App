@@ -25,6 +25,9 @@ app.use(sessions({
   resave: false
 }));
 
+// Login with Google.
+var jwt = require('jsonwebtoken');
+
 /*------------------------------------------
 --------------------------------------------
 Database Connection
@@ -33,9 +36,9 @@ Database Connection
 const conn = mysql.createConnection({
   host: 'localhost',
   user: 'admin',
-  // user: 'root',
+  user: 'root',
   password: 'H3@lthyL1f35tyl3s',
-  // password: 'password',
+  //password: 'password',
   database: 'healthy_lifestyles'
 });
 
@@ -111,6 +114,79 @@ app.post('/api/login-attempt', (req, res, next) => {
     }
   });
 });
+
+
+// Log in with Google API.
+var googleUserDetails;
+app.post('/api/google-login-attempt', (req, res) => {
+  googleUserDetails = jwt.decode(req.body.credential)
+  res.redirect('/api/google-login-attempt');
+});
+
+app.get('/api/google-login-attempt', (req, res, next) => {
+  //res.setHeader('Content-Type', 'application/json');
+  // Get user id based on Google email, if it exists.
+  let sqlQuery1 = "SELECT * FROM users WHERE email = '" + googleUserDetails.email + "';";
+  let query1 = conn.query(sqlQuery1, (err, results) => {
+    try {
+      if (err) {
+        throw err;
+      }
+      // Check if user exists.
+      if (typeof results[0] !== 'undefined') {
+        // Log user in.        
+        req.session.userId = results[0].id
+        req.session.userName = results[0].username
+        req.session.isAdmin = results[0].is_admin
+
+        if (req.session.isAdmin == 1)
+          res.redirect('/admin');
+        else
+          res.redirect('/game');
+      }
+      else {
+        // Create account.
+        var email = googleUserDetails.email
+        var username = googleUserDetails.name
+        var firstName = googleUserDetails.given_name
+        var lastName = googleUserDetails.family_name
+
+        // Log user in.       
+        req.session.userName = username
+        req.session.isAdmin = 0
+
+        var date_time = new Date();
+        let date = ("0" + date_time.getDate()).slice(-2);
+        let month = ("0" + (date_time.getMonth() + 1)).slice(-2);
+        let year = date_time.getFullYear();
+        var currentDate = year + "-" + month + "-" + date
+        var startDate = currentDate;
+
+        let data = { first_name: firstName, last_name: lastName, username: username, email: email, is_admin: 0, start_date: startDate };
+        let sqlQuery2 = "INSERT INTO users SET ?";
+        let query2 = conn.query(sqlQuery2, data, (err, results) => {
+          if (err) {
+            throw err;
+          }
+          else {
+            res.redirect('/game');
+          }
+        });
+
+      }
+    } catch (err) {
+      next(err)
+    }
+  });
+});
+
+// app.get('/api/google-login-result', (req, res) => {
+//   res.setHeader('Content-Type', 'application/json');
+//   res.json({ account: googleLoginResult })
+
+//   // Reset the variable.
+//   googleLoginResult = "";
+// })
 
 
 // Create account route.

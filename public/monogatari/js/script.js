@@ -203,6 +203,7 @@ monogatari.script({
 		"Hmm, seems like the place is empty.",
 		'show scene photo-closeup with fadeIn',
 		"I wish I could go to wild places, like Grandpa used to.",
+		"No school, homework. No one telling me what to do.",
 		'What an exciting life. Nothing ever happens in my life...',
 		'show scene kitchen with fadeIn',
 		"I'm hungry. I'll have...",

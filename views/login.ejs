@@ -2,11 +2,23 @@
 <html lang="en">
 
 <%- include('partials/head'); %>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 
     <body class="login-page text-center">
+
         <div class="form-signin my-1">
             <img class="mb-4" src="images/logo-600x600.png" alt="" width="200" height="200">
-            <div class="mb-3 text-start">
+            <!-- Login with Google -->
+            <div id="g_id_onload"
+                data-client_id="309231279221-r46j4e6utpo00t2292rlpgmeifu3foob.apps.googleusercontent.com"
+                data-context="signin" data-ux_mode="popup" data-login_uri="/api/google-login-attempt"
+                data-auto_prompt="false">
+            </div>
+            <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="filled_blue"
+                data-text="signin_with" data-size="large" data-logo_alignment="left">
+            </div>
+            <!-- Login with username and password -->
+            <div class="mb-3 mt-3 text-start">
                 <!-- <img class="me-1" src="images/icons/user-solid.svg" alt="" width="16" height="16"> -->
                 <label for="username" class="form-label">Username</label>
                 <input type="text" id="username" placeholder="Username" class="form-control" required>
