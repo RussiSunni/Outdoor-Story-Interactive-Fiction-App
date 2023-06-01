@@ -36,7 +36,7 @@ Database Connection
 const conn = mysql.createConnection({
   host: 'localhost',
   user: 'admin',
-  user: 'root',
+  // user: 'root',
   password: 'H3@lthyL1f35tyl3s',
   //password: 'password',
   database: 'healthy_lifestyles'
