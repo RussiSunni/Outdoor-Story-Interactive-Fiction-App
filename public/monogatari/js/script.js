@@ -49,7 +49,6 @@ monogatari.assets('voices', {
 
 // Define the sounds used in the game.
 monogatari.assets('sounds', {
-
 });
 
 // Define the videos used in the game.
@@ -376,6 +375,9 @@ monogatari.script({
 });
 
 function SaveChoice(choiceId, choice) {
+	var audio = new Audio('../assets/audio/choice.mp3');
+	audio.play();
+
 	fetch('/api/save-choice', {
 		method: 'POST',
 		headers: {
