@@ -28,6 +28,11 @@
                     <td id="choice2"></td>
                     <td id="choice2Date"></td>
                 </tr>
+                <tr>
+                    <th scope="row">Choice 3 (Charity)</th>
+                    <td id="choice3"></td>
+                    <td id="choice3Date"></td>
+                </tr>
             </table>
 
 
@@ -57,6 +62,10 @@
                         if (choices[i].choice_id == 2) {
                             document.getElementById("choice2").innerHTML = choices[i].choice;
                             document.getElementById("choice2Date").innerHTML = choices[i].date;
+                        }
+                        if (choices[i].choice_id == 3) {
+                            document.getElementById("choice3").innerHTML = choices[i].choice;
+                            document.getElementById("choice3Date").innerHTML = choices[i].date;
                         }
                     }
                 });

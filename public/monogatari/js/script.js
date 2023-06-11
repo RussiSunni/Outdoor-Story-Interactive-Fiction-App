@@ -305,6 +305,35 @@ monogatari.script({
 				'False': "emily Those boots are pretty dorky, but at least you're covered if it rains or gets cold up there."
 			}
 		},
+		"zack Why don't you donate your change to charity?",
+		{
+			'Choice': {
+				'DontDonate': {
+					'Text': "Nah, I don't believe in donating to charity.",
+					"onChosen": function () {
+						monogatari.storage().donation = "None";
+						SaveChoice(3, "None");
+					},
+					'Do': 'zack Ok, your choice.',
+				},
+				'Animals': {
+					'Text': "Ok, I'll donate to the animal charity.",
+					"onChosen": function () {
+						monogatari.storage().donation = "Animals"
+						SaveChoice(3, "Animals");
+					},
+					'Do': 'zack Ok, your choice.',
+				},
+				'Orphans': {
+					'Text': "Ok, I'll donate to the orphans charity.",
+					"onChosen": function () {
+						monogatari.storage().donation = "Orphans"
+						SaveChoice(3, "Orphans");
+					},
+					'Do': 'zack Ok, your choice.',
+				},
+			},
+		},
 		'stop music shop with fade 1',
 		'jump Driving'],
 	'Driving': [

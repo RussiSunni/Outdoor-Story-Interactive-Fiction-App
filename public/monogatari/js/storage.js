@@ -6,5 +6,6 @@ monogatari.storage({
 		name: ''
 	},
 	first_meal: '',
-	equipment: ''
+	equipment: '',
+	donation: ''
 });
