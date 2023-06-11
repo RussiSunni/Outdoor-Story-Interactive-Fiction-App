@@ -316,19 +316,43 @@ monogatari.script({
 					},
 					'Do': 'zack Ok, your choice.',
 				},
-				'Animals': {
-					'Text': "Ok, I'll donate to the animal charity.",
+				'Cancer': {
+					'Text': "Ok, I'll donate to cancer research.",
 					"onChosen": function () {
-						monogatari.storage().donation = "Animals"
-						SaveChoice(3, "Animals");
+						monogatari.storage().donation = "Cancer research"
+						SaveChoice(3, "Cancer research");
 					},
 					'Do': 'zack Ok, your choice.',
 				},
-				'Orphans': {
-					'Text': "Ok, I'll donate to the orphans charity.",
+				'HomelessFamilies': {
+					'Text': "Ok, I'll donate to the charity helping families without a home.",
 					"onChosen": function () {
-						monogatari.storage().donation = "Orphans"
-						SaveChoice(3, "Orphans");
+						monogatari.storage().donation = "Families without a home"
+						SaveChoice(3, "Families without a home");
+					},
+					'Do': 'zack Ok, your choice.',
+				},
+				'Veterans': {
+					'Text': "Ok, I'll donate to the charity helping veterans.",
+					"onChosen": function () {
+						monogatari.storage().donation = "Veterans"
+						SaveChoice(3, "Veterans");
+					},
+					'Do': 'zack Ok, your choice.',
+				},
+				'Education': {
+					'Text': "Ok, I'll donate to the charity helping with education.",
+					"onChosen": function () {
+						monogatari.storage().donation = "Education"
+						SaveChoice(3, "Education");
+					},
+					'Do': 'zack Ok, your choice.',
+				},
+				'Arts': {
+					'Text': "Ok, I'll donate to the charity that supports the arts.",
+					"onChosen": function () {
+						monogatari.storage().donation = "The arts"
+						SaveChoice(3, "The arts");
 					},
 					'Do': 'zack Ok, your choice.',
 				},
