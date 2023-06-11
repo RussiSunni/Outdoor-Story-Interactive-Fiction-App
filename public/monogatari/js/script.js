@@ -306,10 +306,11 @@ monogatari.script({
 			}
 		},
 		"zack Why don't you donate your change to charity?",
+		"Ok, I'll donate to... ",
 		{
 			'Choice': {
 				'DontDonate': {
-					'Text': "Nah, I don't believe in donating to charity.",
+					'Text': "myself!",
 					"onChosen": function () {
 						monogatari.storage().donation = "None";
 						SaveChoice(3, "None");
@@ -317,7 +318,7 @@ monogatari.script({
 					'Do': 'zack Ok, your choice.',
 				},
 				'Cancer': {
-					'Text': "Ok, I'll donate to cancer research.",
+					'Text': "cancer research.",
 					"onChosen": function () {
 						monogatari.storage().donation = "Cancer research"
 						SaveChoice(3, "Cancer research");
@@ -325,7 +326,7 @@ monogatari.script({
 					'Do': 'zack Ok, your choice.',
 				},
 				'HomelessFamilies': {
-					'Text': "Ok, I'll donate to the charity helping families without a home.",
+					'Text': "helping families without a home.",
 					"onChosen": function () {
 						monogatari.storage().donation = "Families without a home"
 						SaveChoice(3, "Families without a home");
@@ -333,7 +334,7 @@ monogatari.script({
 					'Do': 'zack Ok, your choice.',
 				},
 				'Veterans': {
-					'Text': "Ok, I'll donate to the charity helping veterans.",
+					'Text': "helping veterans.",
 					"onChosen": function () {
 						monogatari.storage().donation = "Veterans"
 						SaveChoice(3, "Veterans");
@@ -341,7 +342,7 @@ monogatari.script({
 					'Do': 'zack Ok, your choice.',
 				},
 				'Education': {
-					'Text': "Ok, I'll donate to the charity helping with education.",
+					'Text': "education.",
 					"onChosen": function () {
 						monogatari.storage().donation = "Education"
 						SaveChoice(3, "Education");
@@ -349,7 +350,7 @@ monogatari.script({
 					'Do': 'zack Ok, your choice.',
 				},
 				'Arts': {
-					'Text': "Ok, I'll donate to the charity that supports the arts.",
+					'Text': "the arts.",
 					"onChosen": function () {
 						monogatari.storage().donation = "The arts"
 						SaveChoice(3, "The arts");
