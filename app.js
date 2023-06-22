@@ -37,7 +37,7 @@ const conn = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: 'H3@lthyL1f35tyl3s',
-  //password: 'password',
+  // password: 'password',
   database: 'healthy_lifestyles'
 });
 
@@ -359,12 +359,36 @@ app.get('/api/choices/:id', function (req, res, next) {
 /**
  * Game screen route.
  */
+// Temporary, while transitioning to new engine.
+app.get('/game-menu', function (req, res, next) {
+  // Check if the user is logged in.
+  var session = req.session;
+  if (session.userName)
+    res.render('game-menu', { username: session.userName });
+
+  // Otherwise, redirect to login page.
+  else
+    res.redirect('/')
+});
+
+
 // Game Route.
 app.get('/game', function (req, res, next) {
   // Check if the user is logged in.
   var session = req.session;
   if (session.userName)
     res.render('game', { username: session.userName });
+
+  // Otherwise, redirect to login page.
+  else
+    res.redirect('/')
+});
+
+app.get('/new-game', function (req, res, next) {
+  // Check if the user is logged in.
+  var session = req.session;
+  if (session.userName)
+    res.render('new-game', { username: session.userName });
 
   // Otherwise, redirect to login page.
   else
