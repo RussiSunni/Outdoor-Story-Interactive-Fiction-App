@@ -16,6 +16,7 @@ export default class Scene1 extends Phaser.Scene {
         this.load.audio('music1', '/assets/Audio/Music/introTrack.mp3')
     }
 
+
     create() {
         // Music -----
         this.music = this.sound.add('music1', {
@@ -29,8 +30,8 @@ export default class Scene1 extends Phaser.Scene {
             .setOrigin(.0, 0);
         this.background.displayWidth = this.sys.canvas.width;
         this.background.displayHeight = this.sys.canvas.height;
-        this.textBg = this.add.rectangle(0, this.sys.canvas.height - this.sys.canvas.height / 4, this.sys.canvas.width, this.sys.canvas.height / 4, '#000000', 0.5).setOrigin(0);
-        this.narrative = this.add.text(0, this.sys.canvas.height - this.sys.canvas.height / 4, 'Our home.', { fontFamily: 'Arial', fill: '#ffffff', fontSize: 40, wordWrap: { width: this.sys.canvas.width - 15, useAdvancedWrap: true } }).setOrigin(0, 0);
+        this.textBg = this.add.rectangle(0, this.sys.canvas.height - this.sys.canvas.height / 4, this.sys.canvas.width, this.sys.canvas.height / 4, '#000000', 0.7).setOrigin(0);
+        this.narrative = this.add.text(0, this.sys.canvas.height - this.sys.canvas.height / 4, 'Our home.', { fontFamily: 'Open Sans', fill: '#ffffff', fontSize: 40, wordWrap: { width: this.sys.canvas.width - 15, useAdvancedWrap: true } }).setOrigin(0, 0);
 
         this.textNum = 2;
 

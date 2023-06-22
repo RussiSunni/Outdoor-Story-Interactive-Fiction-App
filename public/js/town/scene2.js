@@ -49,14 +49,14 @@ export default class Scene2 extends Phaser.Scene {
     }
 
     onDonutsButtonDown() {
-        this.textBg = this.add.rectangle(0, this.sys.canvas.height - this.sys.canvas.height / 4, this.sys.canvas.width, this.sys.canvas.height / 4, '#000000', 0.5).setOrigin(0);
+        this.textBg = this.add.rectangle(0, this.sys.canvas.height - this.sys.canvas.height / 4, this.sys.canvas.width, this.sys.canvas.height / 4, '#000000', 0.7).setOrigin(0);
         this.narrative = this.add.text(0, this.sys.canvas.height - this.sys.canvas.height / 4, 'You choose the donuts.', { fontFamily: 'Arial', fill: '#ffffff', fontSize: 40, wordWrap: { width: this.sys.canvas.width - 15, useAdvancedWrap: true } }).setOrigin(0, 0);
         this.donuts.setAlpha(0)
         this.isFoodChosen = true
     }
 
     onSandwichButtonDown() {
-        this.textBg = this.add.rectangle(0, this.sys.canvas.height - this.sys.canvas.height / 4, this.sys.canvas.width, this.sys.canvas.height / 4, '#000000', 0.5).setOrigin(0);
+        this.textBg = this.add.rectangle(0, this.sys.canvas.height - this.sys.canvas.height / 4, this.sys.canvas.width, this.sys.canvas.height / 4, '#000000', 0.7).setOrigin(0);
         this.narrative = this.add.text(0, this.sys.canvas.height - this.sys.canvas.height / 4, 'You choose the sandwich.', { fontFamily: 'Arial', fill: '#ffffff', fontSize: 40, wordWrap: { width: this.sys.canvas.width - 15, useAdvancedWrap: true } }).setOrigin(0, 0);
         this.sandwich.setAlpha(0)
         this.isFoodChosen = true
