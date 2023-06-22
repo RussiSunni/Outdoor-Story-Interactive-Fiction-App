@@ -8,7 +8,7 @@ export default class Scene2 extends Phaser.Scene {
     }
     preload() {
         //load our images or sounds 
-        this.load.image("fridge", "assets/Backgrounds/Town/fridge.png");
+        this.load.image("fridge", "assets/Backgrounds/Town/fridge.jpg");
         this.load.image("donuts", "assets/Images/donuts.png");
         this.load.image("sandwich", "assets/Images/sandwich.png");
     }

@@ -6,9 +6,9 @@ export default class Scene5 extends Phaser.Scene {
     }
     preload() {
         //load our images or sounds 
-        this.load.image("hiking-shop-exterior", "assets/Backgrounds/Town/hiking-shop-exterior.png");
-        this.load.image("boot-advert", "assets/Backgrounds/Town/boot-advert.png");
-        this.load.image("hiking-shop-interior", "assets/Backgrounds/Town/hiking-shop-interior.png");
+        this.load.image("hiking-shop-exterior", "assets/Backgrounds/Town/hiking-shop-exterior.jpg");
+        this.load.image("boot-advert", "assets/Backgrounds/Town/boot-advert.jpg");
+        this.load.image("hiking-shop-interior", "assets/Backgrounds/Town/hiking-shop-interior.jpg");
     }
 
     create() {

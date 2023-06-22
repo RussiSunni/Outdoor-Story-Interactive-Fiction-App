@@ -6,8 +6,8 @@ export default class Scene4 extends Phaser.Scene {
     }
     preload() {
         //load our images or sounds 
-        this.load.image("park-entrance", "assets/Backgrounds/Town/park-entrance.png");
-        this.load.image("park", "assets/Backgrounds/Town/park.png");
+        this.load.image("park-entrance", "assets/Backgrounds/Town/park-entrance.jpg");
+        this.load.image("park", "assets/Backgrounds/Town/park.jpg");
         this.load.image("emily", "assets/Characters/emily.png");
         this.load.image("zack", "assets/Characters/zack.png");
     }

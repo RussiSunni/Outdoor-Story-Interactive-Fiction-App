@@ -6,12 +6,12 @@ export default class Scene1 extends Phaser.Scene {
     }
     preload() {
         //load our images or sounds 
-        this.load.image("apartment", "assets/Backgrounds/Town/apartment-2.png");
-        this.load.image("elevator", "assets/Backgrounds/Town/elevator.png");
-        this.load.image("hallway", "assets/Backgrounds/Town/hallway.png");
-        this.load.image("photo", "assets/Backgrounds/Town/photo-closeup.png");
-        this.load.image("kitchen", "assets/Backgrounds/Town/kitchen.png");
-        this.load.image("cash", "assets/Backgrounds/Town/cash.png");
+        this.load.image("apartment", "assets/Backgrounds/Town/apartment-2.jpg");
+        this.load.image("elevator", "assets/Backgrounds/Town/elevator.jpg");
+        this.load.image("hallway", "assets/Backgrounds/Town/hallway.jpg");
+        this.load.image("photo", "assets/Backgrounds/Town/photo-closeup.jpg");
+        this.load.image("kitchen", "assets/Backgrounds/Town/kitchen.jpg");
+        this.load.image("cash", "assets/Backgrounds/Town/cash.jpg");
     }
 
     create() {
