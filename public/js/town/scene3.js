@@ -9,7 +9,8 @@ export default class Scene3 extends Phaser.Scene {
         this.load.image("cash", "assets/Backgrounds/Town/cash.jpg");
     }
 
-    create() {
+    // data is for carrying across the music variable.
+    create(data) {
         // BG 1 --------------------------------------------
         this.background = this.add.image(0, 0, "cash")
             .setOrigin(.0, 0);
@@ -36,6 +37,7 @@ export default class Scene3 extends Phaser.Scene {
                     this.textNum = 5;
                 }
                 else if (this.textNum == 5) {
+                    data.music.stop();
                     this.scene.start("Scene4");
                 }
             }, this

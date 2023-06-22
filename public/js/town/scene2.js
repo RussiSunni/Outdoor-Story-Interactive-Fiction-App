@@ -13,7 +13,8 @@ export default class Scene2 extends Phaser.Scene {
         this.load.image("sandwich", "assets/Images/sandwich.png");
     }
 
-    create() {
+    // data is for carrying across the music variable.
+    create(data) {
         // BG 1 --------------------------------------------
         this.background = this.add.image(0, 0, "fridge")
             .setOrigin(.0, 0);
@@ -24,8 +25,9 @@ export default class Scene2 extends Phaser.Scene {
             function () {
                 if (this.isFoodChosen) {
                     this.clicks++;
-                    if (this.clicks == 2)
-                        this.scene.start("Scene3");
+                    if (this.clicks == 2) {
+                        this.scene.start("Scene3", { music: data.music });
+                    }
                 }
             }, this);
 

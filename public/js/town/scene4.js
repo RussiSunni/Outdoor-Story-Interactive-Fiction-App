@@ -10,9 +10,19 @@ export default class Scene4 extends Phaser.Scene {
         this.load.image("park", "assets/Backgrounds/Town/park.jpg");
         this.load.image("emily", "assets/Characters/emily.png");
         this.load.image("zack", "assets/Characters/zack.png");
+
+        this.load.audio('music2', '/assets/Audio/Music/parkTrack.mp3')
     }
 
     create() {
+        // Music -----
+        this.music = this.sound.add('music2', {
+            volume: 0.2,
+            loop: false
+        })
+        this.music.play()
+
+
         // BG 1 --------------------------------------------
         this.background = this.add.image(0, 0, "park-entrance")
             .setOrigin(.0, 0);
@@ -104,6 +114,7 @@ export default class Scene4 extends Phaser.Scene {
                         this.narrativeNum = 9
                     }
                     else if (this.narrativeNum == 9) {
+                        this.music.stop();
                         this.scene.start("Scene5");
                     }
                 }

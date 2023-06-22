@@ -12,9 +12,18 @@ export default class Scene1 extends Phaser.Scene {
         this.load.image("photo", "assets/Backgrounds/Town/photo-closeup.jpg");
         this.load.image("kitchen", "assets/Backgrounds/Town/kitchen.jpg");
         this.load.image("cash", "assets/Backgrounds/Town/cash.jpg");
+
+        this.load.audio('music1', '/assets/Audio/Music/introTrack.mp3')
     }
 
     create() {
+        // Music -----
+        this.music = this.sound.add('music1', {
+            volume: 0.2,
+            loop: false
+        })
+        this.music.play()
+
         // BG 1 --------------------------------------------
         this.background = this.add.image(0, 0, "apartment")
             .setOrigin(.0, 0);
@@ -73,7 +82,7 @@ export default class Scene1 extends Phaser.Scene {
                     this.narrative.setText("I'm hungry. I'll have...")
                 }
                 else if (this.bgNum == 6) {
-                    this.scene.start("Scene2");
+                    this.scene.start('Scene2', { music: this.music });
                 }
             }, this
         );
