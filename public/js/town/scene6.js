@@ -1,4 +1,4 @@
-export default class Scene5 extends Phaser.Scene {
+export default class Scene6 extends Phaser.Scene {
     constructor() {
         super('Scene6');
         this.money = 200
@@ -73,11 +73,13 @@ export default class Scene5 extends Phaser.Scene {
     }
 
     onExpensiveBootsButtonDown() {
+        this.yesContainer.setInteractive()
         if (this.money == 200) {
             this.narrative.setText('Zoran boots for $200?')
             this.yesContainer.on('pointerdown', function () {
                 this.narrative.setText('')
                 this.money = 0;
+                this.yesContainer.disableInteractive()
             }, this);
         }
         else {
@@ -86,22 +88,26 @@ export default class Scene5 extends Phaser.Scene {
     }
 
     onCheapBootsButtonDown() {
+        this.yesContainer.setInteractive()
         this.narrative.setText('Buy second hand boots for $100?')
         this.yesContainer.on('pointerdown', function () {
             this.money = this.money - 100;
             this.cheapBoots.setInteractive(false);
             this.cheapBoots.alpha = 0
             this.narrative.setText('')
+            this.yesContainer.disableInteractive()
         }, this);
     }
 
     onAnorakButtonDown() {
+        this.yesContainer.setInteractive()
         this.narrative.setText('Buy anorak for $100?')
         this.yesContainer.on('pointerdown', function () {
             this.money = this.money - 100;
             this.anorak.setInteractive(false);
             this.anorak.alpha = 0
             this.narrative.setText('')
+            this.yesContainer.disableInteractive()
         }, this);
     }
 }
