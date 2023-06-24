@@ -3,6 +3,12 @@ export default class Scene5 extends Phaser.Scene {
         super('Scene5');
         this.textNum = 0;
         this.bgNum = 0;
+        this.moneyAmount;
+        this.hasBoughtExpensiveBoots;
+        this.hasBoughtCheapBoots;
+        this.hasBoughtAnorak;
+        this.textBg2
+        this.narrative2
     }
     preload() {
         //load our images or sounds 
@@ -83,8 +89,24 @@ export default class Scene5 extends Phaser.Scene {
                     this.charDialogue.setText("")
                     this.textBg.alpha = 0
 
-                    this.moneyBg = this.add.rectangle(this.sys.canvas.width - (this.sys.canvas.width / 6), 0, this.sys.canvas.width / 6, this.sys.canvas.height / 16, 0X00FF00, 1).setOrigin(0);
-                    this.moneyAmount = this.add.text(this.sys.canvas.width - (this.sys.canvas.width / 6), 0, '$200', { fontFamily: 'Arial', fill: '#000000', fontSize: 40, wordWrap: { width: this.sys.canvas.width - 15, useAdvancedWrap: true } }).setOrigin(0, 0);
+                    //    this.moneyBg = this.add.rectangle(this.sys.canvas.width - (this.sys.canvas.width / 6), 0, this.sys.canvas.width / 6, this.sys.canvas.height / 16, 0X00FF00, 1).setOrigin(0);
+                    //  this.moneyAmount = this.add.text(this.sys.canvas.width - (this.sys.canvas.width / 6), 0, '$200', { fontFamily: 'Arial', fill: '#000000', fontSize: 40, wordWrap: { width: this.sys.canvas.width - 15, useAdvancedWrap: true } }).setOrigin(0, 0);
+                    this.textBg2 = this.add.rectangle(0, this.sys.canvas.height - this.sys.canvas.height / 10, this.sys.canvas.width, this.sys.canvas.height / 4, '#000000', 0.7).setOrigin(0);
+                    this.textBg2.alpha = 0
+                    this.narrative = this.add.text(0, this.sys.canvas.height - this.sys.canvas.height / 10, '', { fontFamily: 'Arial', fill: '#ffffff', fontSize: 40, wordWrap: { width: this.sys.canvas.width - 15, useAdvancedWrap: true } }).setOrigin(0, 0);
+
+                    let yesGraphic = this.add.graphics();
+                    yesGraphic.fillStyle(0x000000, 0.5);
+                    yesGraphic.fillRoundedRect(0, 0, 100, 80, 16);
+                    this.yesText = this.add.text(20, 15, "Yes", { fontFamily: 'Arial', fill: '#ffffff', fontSize: 40, wordWrap: { width: this.sys.canvas.width - 15, useAdvancedWrap: true } }).setOrigin(0);
+                    this.yesContainer = this.add.container(0, 0, [yesGraphic, this.yesText]);
+                    this.yesContainer.alpha = 0
+
+                    let expensiveBootsNoGraphic = this.add.graphics();
+                    expensiveBootsNoGraphic.fillStyle(0x000000, 0.5);
+                    expensiveBootsNoGraphic.fillRoundedRect(0, 0, 100, 80, 16);
+                    this.expensiveBootsNoText = this.add.text(20, 15, "No", { fontFamily: 'Arial', fill: '#ffffff', fontSize: 40, wordWrap: { width: this.sys.canvas.width - 15, useAdvancedWrap: true } }).setOrigin(0);
+                    this.expensiveBootsNoContainer = this.add.container(120, 0, [expensiveBootsNoGraphic, this.expensiveBootsNoText]);
 
                     this.expensiveBoots = this.add.sprite(0, 0, "expensive-boots").setOrigin(0.5)
                     this.expensiveBoots.displayWidth = this.sys.canvas.width / 4.5
@@ -114,18 +136,14 @@ export default class Scene5 extends Phaser.Scene {
 
 
     onExpensiveBootsButtonDown() {
-        this.textBg2 = this.add.rectangle(0, this.sys.canvas.height - this.sys.canvas.height / 10, this.sys.canvas.width, this.sys.canvas.height / 4, '#000000', 0.7).setOrigin(0);
-        this.narrative = this.add.text(0, this.sys.canvas.height - this.sys.canvas.height / 10, 'Buy Zoran boots for $200?', { fontFamily: 'Arial', fill: '#ffffff', fontSize: 40, wordWrap: { width: this.sys.canvas.width - 15, useAdvancedWrap: true } }).setOrigin(0, 0);
+        this.textBg2.alpha = 1
+        this.narrative.setText('Buy Zoran boots for $200?')
 
-        let expensiveBootsYesGraphic = this.add.graphics();
-        expensiveBootsYesGraphic.fillStyle(0x000000, 0.5);
-        expensiveBootsYesGraphic.fillRoundedRect(0, 0, 100, 80, 16);
-        this.expensiveBootsYesText = this.add.text(20, 15, "Yes", { fontFamily: 'Arial', fill: '#ffffff', fontSize: 40, wordWrap: { width: this.sys.canvas.width - 15, useAdvancedWrap: true } }).setOrigin(0);
-        this.expensiveBootsYesContainer = this.add.container(0, 0, [expensiveBootsYesGraphic, this.expensiveBootsYesText]);
-        this.expensiveBootsYesContainer.setInteractive(new Phaser.Geom.Rectangle(0, 0, 100, 80), Phaser.Geom.Rectangle.Contains);
-        this.expensiveBootsYesContainer.on('pointerdown', function () {
-            console.log("test")
-            this.moneyAmount.setText("$0")
+        this.yesContainer.alpha = 1
+        this.yesContainer.setInteractive(new Phaser.Geom.Rectangle(0, 0, 100, 80), Phaser.Geom.Rectangle.Contains);
+        this.yesContainer.on('pointerdown', function () {
+            this.hasBoughtExpensiveBoots = true;
+            this.narrative.setText("Ok, $0 left.");
         }, this);
 
         let expensiveBootsNoGraphic = this.add.graphics();
@@ -143,10 +161,8 @@ export default class Scene5 extends Phaser.Scene {
     }
 
     onCheapBootsButtonDown() {
-        console.log("cboots")
-
-        this.textBg2 = this.add.rectangle(0, this.sys.canvas.height - this.sys.canvas.height / 10, this.sys.canvas.width, this.sys.canvas.height / 4, '#000000', 0.7).setOrigin(0);
-        this.narrative = this.add.text(0, this.sys.canvas.height - this.sys.canvas.height / 10, 'Buy second hand boots for $100?', { fontFamily: 'Arial', fill: '#ffffff', fontSize: 40, wordWrap: { width: this.sys.canvas.width - 15, useAdvancedWrap: true } }).setOrigin(0, 0);
+        this.textBg2.alpha = 1
+        this.narrative.setText('Buy second hand boots for $100?')
 
         let cheapBootsYesGraphic = this.add.graphics();
         cheapBootsYesGraphic.fillStyle(0x000000, 0.5);
@@ -155,8 +171,14 @@ export default class Scene5 extends Phaser.Scene {
         this.cheapBootsYesContainer = this.add.container(0, 0, [cheapBootsYesGraphic, this.cheapBootsYesText]);
         this.cheapBootsYesContainer.setInteractive(new Phaser.Geom.Rectangle(0, 0, 100, 80), Phaser.Geom.Rectangle.Contains);
         this.cheapBootsYesContainer.on('pointerdown', function () {
-            console.log("test")
+            this.hasBoughtCheapBoots = true;
+            if (this.hasBoughtAnorak == true)
+                this.narrative.setText("$0 left.")
+            else
+                this.narrative.setText("$100 left.")
 
+            this.cheapBootsNoContainer.destroy()
+            this.cheapBootsYesContainer.destroy()
         }, this);
 
         let cheapBootsNoGraphic = this.add.graphics();
@@ -174,10 +196,8 @@ export default class Scene5 extends Phaser.Scene {
     }
 
     onAnorakButtonDown() {
-        console.log("anorak")
-
-        this.textBg2 = this.add.rectangle(0, this.sys.canvas.height - this.sys.canvas.height / 10, this.sys.canvas.width, this.sys.canvas.height / 4, '#000000', 0.7).setOrigin(0);
-        this.narrative = this.add.text(0, this.sys.canvas.height - this.sys.canvas.height / 10, 'Buy anorak for $100?', { fontFamily: 'Arial', fill: '#ffffff', fontSize: 40, wordWrap: { width: this.sys.canvas.width - 15, useAdvancedWrap: true } }).setOrigin(0, 0);
+        this.textBg2.alpha = 1
+        this.narrative.setText('Buy anorak for $100?')
 
         let anorakYesGraphic = this.add.graphics();
         anorakYesGraphic.fillStyle(0x000000, 0.5);
@@ -186,8 +206,15 @@ export default class Scene5 extends Phaser.Scene {
         this.anorakYesContainer = this.add.container(0, 0, [anorakYesGraphic, this.anorakYesText]);
         this.anorakYesContainer.setInteractive(new Phaser.Geom.Rectangle(0, 0, 100, 80), Phaser.Geom.Rectangle.Contains);
         this.anorakYesContainer.on('pointerdown', function () {
-            console.log("test")
+            this.hasBoughtAnorak = true;
 
+            this.cheapBootsNoContainer.destroy()
+            this.cheapBootsYesContainer.destroy()
+
+            if (this.hasBoughtCheapBoots == true)
+                this.narrative.setText("$0 left.")
+            else
+                this.narrative.setText("$100 left.")
         }, this);
 
         let anorakNoGraphic = this.add.graphics();
