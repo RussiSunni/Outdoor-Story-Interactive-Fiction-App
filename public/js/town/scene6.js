@@ -1,14 +1,7 @@
 export default class Scene5 extends Phaser.Scene {
     constructor() {
         super('Scene6');
-        this.textNum = 0;
-        this.bgNum = 0;
-        this.moneyAmount;
-        this.hasBoughtExpensiveBoots;
-        this.hasBoughtCheapBoots;
-        this.hasBoughtAnorak;
-        this.textBg2
-        this.narrative2
+        this.money = 200
     }
     preload() {
         //load our images or sounds         
@@ -28,7 +21,6 @@ export default class Scene5 extends Phaser.Scene {
         this.background.displayHeight = this.sys.canvas.height;
 
         this.textBg = this.add.rectangle(0, this.sys.canvas.height - this.sys.canvas.height / 10, this.sys.canvas.width, this.sys.canvas.height / 4, '#000000', 0.7).setOrigin(0);
-        this.textBg.alpha = 0
         this.narrative = this.add.text(0, this.sys.canvas.height - this.sys.canvas.height / 10, '', { fontFamily: 'Arial', fill: '#ffffff', fontSize: 40, wordWrap: { width: this.sys.canvas.width - 15, useAdvancedWrap: true } }).setOrigin(0, 0);
 
         let yesGraphic = this.add.graphics();
@@ -45,7 +37,6 @@ export default class Scene5 extends Phaser.Scene {
         this.noContainer = this.add.container(120, 0, [noGraphic, this.noText]);
         this.noContainer.setInteractive(new Phaser.Geom.Rectangle(0, 0, 200, 80), Phaser.Geom.Rectangle.Contains);
         this.noContainer.on('pointerdown', function () {
-            this.textBg.alpha = 0
             this.narrative.setText('')
         }, this);
 
@@ -69,46 +60,48 @@ export default class Scene5 extends Phaser.Scene {
         this.anorak.setPosition(this.sys.canvas.width / 1.5, this.sys.canvas.height / 1.6)
         this.anorak.setInteractive();
         this.anorak.on("pointerdown", this.onAnorakButtonDown, this);
+
+        var i = 0
+        this.input.on('pointerdown',
+            function () {
+                if (this.money <= 0) {
+                    i++
+                    if (i == 2)
+                        this.scene.start("Scene7");
+                }
+            }, this)
     }
 
-
     onExpensiveBootsButtonDown() {
-        this.textBg.alpha = 1
-        this.narrative.setText('Zoran boots for $200?')
-
-        this.yesContainer.on('pointerdown', function () {
-            this.hasBoughtExpensiveBoots = true;
-            this.narrative.setText("Ok, $0 left.");
-        }, this);
+        if (this.money == 200) {
+            this.narrative.setText('Zoran boots for $200?')
+            this.yesContainer.on('pointerdown', function () {
+                this.narrative.setText('')
+                this.money = 0;
+            }, this);
+        }
+        else {
+            this.narrative.setText("You can't afford that.")
+        }
     }
 
     onCheapBootsButtonDown() {
-        this.textBg.alpha = 1
         this.narrative.setText('Buy second hand boots for $100?')
-
         this.yesContainer.on('pointerdown', function () {
-            this.hasBoughtCheapBoots = true;
-            if (this.hasBoughtAnorak == true)
-                this.narrative.setText("$0 left.")
-            else
-                this.narrative.setText("$100 left.")
+            this.money = this.money - 100;
+            this.cheapBoots.setInteractive(false);
+            this.cheapBoots.alpha = 0
+            this.narrative.setText('')
         }, this);
     }
 
     onAnorakButtonDown() {
-        this.textBg.alpha = 1
         this.narrative.setText('Buy anorak for $100?')
-
         this.yesContainer.on('pointerdown', function () {
-            this.hasBoughtAnorak = true;
-
-            this.cheapBootsNoContainer.destroy()
-            this.cheapBootsYesContainer.destroy()
-
-            if (this.hasBoughtCheapBoots == true)
-                this.narrative.setText("$0 left.")
-            else
-                this.narrative.setText("$100 left.")
+            this.money = this.money - 100;
+            this.anorak.setInteractive(false);
+            this.anorak.alpha = 0
+            this.narrative.setText('')
         }, this);
     }
 }
