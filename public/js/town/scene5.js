@@ -9,6 +9,10 @@ export default class Scene5 extends Phaser.Scene {
         this.load.image("hiking-shop-exterior", "assets/Backgrounds/Town/hiking-shop-exterior.jpg");
         this.load.image("boot-advert", "assets/Backgrounds/Town/boot-advert.jpg");
         this.load.image("hiking-shop-interior", "assets/Backgrounds/Town/hiking-shop-interior.jpg");
+        this.load.image("cheap-boots", "assets/Images/cheap-boots.png");
+        this.load.image("expensive-boots", "assets/Images/expensive-boots.png");
+        this.load.image("cheap-boots", "assets/Images/cheap-boots.png");
+        this.load.image("anorak", "assets/Images/anorak.png");
 
         this.load.audio('music3', '/assets/Audio/Music/shopTrack.mp3')
     }
@@ -72,6 +76,7 @@ export default class Scene5 extends Phaser.Scene {
                         this.bgNum = 1;
                     }
                 }
+                // Hiking shop interior.
                 else if (this.bgNum == 1) {
                     this.background.setTexture('hiking-shop-interior')
                     this.charNameText.setText('')
@@ -80,8 +85,43 @@ export default class Scene5 extends Phaser.Scene {
 
                     this.moneyBg = this.add.rectangle(this.sys.canvas.width - (this.sys.canvas.width / 6), 0, this.sys.canvas.width / 6, this.sys.canvas.height / 16, 0X00FF00, 1).setOrigin(0);
                     this.moneyAmount = this.add.text(this.sys.canvas.width - (this.sys.canvas.width / 6), 0, '$200', { fontFamily: 'Arial', fill: '#000000', fontSize: 40, wordWrap: { width: this.sys.canvas.width - 15, useAdvancedWrap: true } }).setOrigin(0, 0);
+
+                    this.expensiveBoots = this.add.sprite(0, 0, "expensive-boots").setOrigin(0.5)
+                    this.expensiveBoots.displayWidth = this.sys.canvas.width / 4.5
+                    this.expensiveBoots.displayHeight = this.sys.canvas.height / 8.5
+                    this.expensiveBoots.setPosition(this.sys.canvas.width / 1.4, this.sys.canvas.height / 1.2)
+                    this.expensiveBoots.setInteractive();
+                    this.expensiveBoots.on("pointerdown", this.onExpensiveBootsButtonDown, this);
+
+                    this.cheapBoots = this.add.sprite(0, 0, "cheap-boots").setOrigin(0.5)
+                    this.cheapBoots.displayWidth = this.sys.canvas.width / 6
+                    this.cheapBoots.displayHeight = this.sys.canvas.height / 12
+                    this.cheapBoots.setPosition(this.sys.canvas.width / 1.8, this.sys.canvas.height / 1.3)
+                    this.cheapBoots.setInteractive();
+                    this.cheapBoots.on("pointerdown", this.onCheapBootsButtonDown, this);
+
+                    this.anorak = this.add.sprite(0, 0, "anorak").setOrigin(0.5)
+                    this.anorak.displayWidth = this.sys.canvas.width / 4
+                    this.anorak.displayHeight = this.sys.canvas.height / 5.5
+                    this.anorak.setPosition(this.sys.canvas.width / 1.5, this.sys.canvas.height / 1.6)
+                    this.anorak.setInteractive();
+                    this.anorak.on("pointerdown", this.onAnorakButtonDown, this);
+
                 }
 
             }, this)
+    }
+
+
+    onExpensiveBootsButtonDown() {
+        console.log("eboots")
+    }
+
+    onCheapBootsButtonDown() {
+        console.log("cboots")
+    }
+
+    onAnorakButtonDown() {
+        console.log("anoraks")
     }
 }
