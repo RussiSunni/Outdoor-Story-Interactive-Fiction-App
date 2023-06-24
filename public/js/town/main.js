@@ -3,6 +3,7 @@ import Scene2 from './scene2.js'
 import Scene3 from './scene3.js'
 import Scene4 from './scene4.js'
 import Scene5 from './scene5.js'
+import Scene6 from './scene6.js'
 
 let config = {
     type: Phaser.AUTO,
@@ -20,6 +21,6 @@ let config = {
     },
 
 
-    scene: [Scene1, Scene2, Scene3, Scene4, Scene5]
+    scene: [Scene6, Scene1, Scene2, Scene3, Scene4, Scene5]
 };
 export default new Phaser.Game(config)
