@@ -114,14 +114,94 @@ export default class Scene5 extends Phaser.Scene {
 
 
     onExpensiveBootsButtonDown() {
-        console.log("eboots")
+        this.textBg2 = this.add.rectangle(0, this.sys.canvas.height - this.sys.canvas.height / 10, this.sys.canvas.width, this.sys.canvas.height / 4, '#000000', 0.7).setOrigin(0);
+        this.narrative = this.add.text(0, this.sys.canvas.height - this.sys.canvas.height / 10, 'Buy Zoran boots for $200?', { fontFamily: 'Arial', fill: '#ffffff', fontSize: 40, wordWrap: { width: this.sys.canvas.width - 15, useAdvancedWrap: true } }).setOrigin(0, 0);
+
+        let expensiveBootsYesGraphic = this.add.graphics();
+        expensiveBootsYesGraphic.fillStyle(0x000000, 0.5);
+        expensiveBootsYesGraphic.fillRoundedRect(0, 0, 100, 80, 16);
+        this.expensiveBootsYesText = this.add.text(20, 15, "Yes", { fontFamily: 'Arial', fill: '#ffffff', fontSize: 40, wordWrap: { width: this.sys.canvas.width - 15, useAdvancedWrap: true } }).setOrigin(0);
+        this.expensiveBootsYesContainer = this.add.container(0, 0, [expensiveBootsYesGraphic, this.expensiveBootsYesText]);
+        this.expensiveBootsYesContainer.setInteractive(new Phaser.Geom.Rectangle(0, 0, 100, 80), Phaser.Geom.Rectangle.Contains);
+        this.expensiveBootsYesContainer.on('pointerdown', function () {
+            console.log("test")
+            this.moneyAmount.setText("$0")
+        }, this);
+
+        let expensiveBootsNoGraphic = this.add.graphics();
+        expensiveBootsNoGraphic.fillStyle(0x000000, 0.5);
+        expensiveBootsNoGraphic.fillRoundedRect(0, 0, 100, 80, 16);
+        this.expensiveBootsNoText = this.add.text(20, 15, "No", { fontFamily: 'Arial', fill: '#ffffff', fontSize: 40, wordWrap: { width: this.sys.canvas.width - 15, useAdvancedWrap: true } }).setOrigin(0);
+        this.expensiveBootsNoContainer = this.add.container(120, 0, [expensiveBootsNoGraphic, this.expensiveBootsNoText]);
+        this.expensiveBootsNoContainer.setInteractive(new Phaser.Geom.Rectangle(0, 0, 100, 80), Phaser.Geom.Rectangle.Contains);
+        this.expensiveBootsNoContainer.on('pointerdown', function () {
+            this.expensiveBootsNoContainer.destroy()
+            this.expensiveBootsYesContainer.destroy()
+            this.textBg2.destroy()
+            this.narrative.setText('')
+        }, this);
     }
 
     onCheapBootsButtonDown() {
         console.log("cboots")
+
+        this.textBg2 = this.add.rectangle(0, this.sys.canvas.height - this.sys.canvas.height / 10, this.sys.canvas.width, this.sys.canvas.height / 4, '#000000', 0.7).setOrigin(0);
+        this.narrative = this.add.text(0, this.sys.canvas.height - this.sys.canvas.height / 10, 'Buy second hand boots for $100?', { fontFamily: 'Arial', fill: '#ffffff', fontSize: 40, wordWrap: { width: this.sys.canvas.width - 15, useAdvancedWrap: true } }).setOrigin(0, 0);
+
+        let cheapBootsYesGraphic = this.add.graphics();
+        cheapBootsYesGraphic.fillStyle(0x000000, 0.5);
+        cheapBootsYesGraphic.fillRoundedRect(0, 0, 100, 80, 16);
+        this.cheapBootsYesText = this.add.text(20, 15, "Yes", { fontFamily: 'Arial', fill: '#ffffff', fontSize: 40, wordWrap: { width: this.sys.canvas.width - 15, useAdvancedWrap: true } }).setOrigin(0);
+        this.cheapBootsYesContainer = this.add.container(0, 0, [cheapBootsYesGraphic, this.cheapBootsYesText]);
+        this.cheapBootsYesContainer.setInteractive(new Phaser.Geom.Rectangle(0, 0, 100, 80), Phaser.Geom.Rectangle.Contains);
+        this.cheapBootsYesContainer.on('pointerdown', function () {
+            console.log("test")
+
+        }, this);
+
+        let cheapBootsNoGraphic = this.add.graphics();
+        cheapBootsNoGraphic.fillStyle(0x000000, 0.5);
+        cheapBootsNoGraphic.fillRoundedRect(0, 0, 100, 80, 16);
+        this.cheapBootsNoText = this.add.text(20, 15, "No", { fontFamily: 'Arial', fill: '#ffffff', fontSize: 40, wordWrap: { width: this.sys.canvas.width - 15, useAdvancedWrap: true } }).setOrigin(0);
+        this.cheapBootsNoContainer = this.add.container(120, 0, [cheapBootsNoGraphic, this.cheapBootsNoText]);
+        this.cheapBootsNoContainer.setInteractive(new Phaser.Geom.Rectangle(0, 0, 100, 80), Phaser.Geom.Rectangle.Contains);
+        this.cheapBootsNoContainer.on('pointerdown', function () {
+            this.cheapBootsNoContainer.destroy()
+            this.cheapBootsYesContainer.destroy()
+            this.textBg2.destroy()
+            this.narrative.setText('')
+        }, this);
     }
 
     onAnorakButtonDown() {
-        console.log("anoraks")
+        console.log("anorak")
+
+        this.textBg2 = this.add.rectangle(0, this.sys.canvas.height - this.sys.canvas.height / 10, this.sys.canvas.width, this.sys.canvas.height / 4, '#000000', 0.7).setOrigin(0);
+        this.narrative = this.add.text(0, this.sys.canvas.height - this.sys.canvas.height / 10, 'Buy anorak for $100?', { fontFamily: 'Arial', fill: '#ffffff', fontSize: 40, wordWrap: { width: this.sys.canvas.width - 15, useAdvancedWrap: true } }).setOrigin(0, 0);
+
+        let anorakYesGraphic = this.add.graphics();
+        anorakYesGraphic.fillStyle(0x000000, 0.5);
+        anorakYesGraphic.fillRoundedRect(0, 0, 100, 80, 16);
+        this.anorakYesText = this.add.text(20, 15, "Yes", { fontFamily: 'Arial', fill: '#ffffff', fontSize: 40, wordWrap: { width: this.sys.canvas.width - 15, useAdvancedWrap: true } }).setOrigin(0);
+        this.anorakYesContainer = this.add.container(0, 0, [anorakYesGraphic, this.anorakYesText]);
+        this.anorakYesContainer.setInteractive(new Phaser.Geom.Rectangle(0, 0, 100, 80), Phaser.Geom.Rectangle.Contains);
+        this.anorakYesContainer.on('pointerdown', function () {
+            console.log("test")
+
+        }, this);
+
+        let anorakNoGraphic = this.add.graphics();
+        anorakNoGraphic.fillStyle(0x000000, 0.5);
+        anorakNoGraphic.fillRoundedRect(0, 0, 100, 80, 16);
+        this.anorakNoText = this.add.text(20, 15, "No", { fontFamily: 'Arial', fill: '#ffffff', fontSize: 40, wordWrap: { width: this.sys.canvas.width - 15, useAdvancedWrap: true } }).setOrigin(0);
+        this.anorakNoContainer = this.add.container(120, 0, [anorakNoGraphic, this.anorakNoText]);
+        this.anorakNoContainer.setInteractive(new Phaser.Geom.Rectangle(0, 0, 100, 80), Phaser.Geom.Rectangle.Contains);
+        this.anorakNoContainer.on('pointerdown', function () {
+            this.anorakNoContainer.destroy()
+            this.anorakYesContainer.destroy()
+            this.textBg2.destroy()
+            this.narrative.setText('')
+        }, this);
+
     }
 }
