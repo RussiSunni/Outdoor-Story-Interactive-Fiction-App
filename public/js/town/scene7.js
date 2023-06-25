@@ -70,6 +70,20 @@ export default class Scene7 extends Phaser.Scene {
                     else if (this.textNum == 3) {
                         this.charNameText.setText('Zack')
                         this.charDialogue.setText("No problem Emily, we'll wait with you.")
+
+                        this.textNum = 4
+                    }
+                    else if (this.textNum == 4) {
+                        this.charNameText.setText('Emily')
+                        this.charDialogue.setText("Shouldn't ask Gramps to wait up for us?")
+
+                        this.textNum = 5
+                    }
+                    else if (this.textNum == 5) {
+                        this.charNameText.setText('Zack')
+                        this.charDialogue.setText("Nah, the trail is simple, we'll catch up easily.")
+
+                        this.textNum = 6
                     }
                 }
             }, this)
