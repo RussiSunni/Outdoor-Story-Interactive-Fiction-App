@@ -9,6 +9,7 @@ export default class Scene7 extends Phaser.Scene {
         this.load.image("checkout", "assets/Backgrounds/Town/hiking-shop-checkout.jpg");
         this.load.image("driving", "assets/Backgrounds/Town/driving.jpg");
         this.load.image("trail-beginning", "assets/Backgrounds/Town/trail-beginning.jpg");
+        this.load.image("trail", "assets/Backgrounds/Town/trail.jpg");
         this.load.image("gramps", "assets/Characters/gramps.png");
     }
 
@@ -41,12 +42,35 @@ export default class Scene7 extends Phaser.Scene {
                     this.bgNum = 1;
                 }
                 else if (this.bgNum == 1) {
-                    this.grampsSprite.alpha = 1
+                    if (this.textNum == 0) {
+                        this.grampsSprite.alpha = 1
+                        this.narrative.setText('')
+                        this.background.setTexture('trail-beginning')
+                        this.charNameText.setText('Gramps')
+                        this.charDialogue.setText('Finally here!')
 
-                    this.narrative.setText('')
-                    this.background.setTexture('trail-beginning')
-                    this.charNameText.setText('Gramps')
-                    this.charDialogue.setText('Finally here!')
+                        this.textNum = 1
+                    }
+                    else if (this.textNum == 1) {
+                        this.charDialogue.setText('Now you guys follow close and dont get lost.')
+                        this.bgNum = 2;
+
+                        this.textNum = 2
+                    }
+                }
+                else if (this.bgNum == 2) {
+                    if (this.textNum == 2) {
+                        this.grampsSprite.alpha = 0
+                        this.background.setTexture('trail')
+                        this.charNameText.setText('Emily')
+                        this.charDialogue.setText('Uh guys, I need to tie my shoelaces.')
+
+                        this.textNum = 3
+                    }
+                    else if (this.textNum == 3) {
+                        this.charNameText.setText('Zack')
+                        this.charDialogue.setText("No problem Emily, we'll wait with you.")
+                    }
                 }
             }, this)
     }
