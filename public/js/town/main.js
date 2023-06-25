@@ -22,6 +22,6 @@ let config = {
     },
 
 
-    scene: [Scene7, Scene2, Scene3, Scene4, Scene5, Scene6, Scene1]
+    scene: [Scene1, Scene2, Scene3, Scene4, Scene5, Scene6, Scene7]
 };
 export default new Phaser.Game(config)
