@@ -9,8 +9,10 @@ export default class Scene7 extends Phaser.Scene {
         this.load.image("checkout", "assets/Backgrounds/Town/hiking-shop-checkout.jpg");
         this.load.image("driving", "assets/Backgrounds/Town/driving.jpg");
         this.load.image("trail-beginning", "assets/Backgrounds/Town/trail-beginning.jpg");
-        this.load.image("trail", "assets/Backgrounds/Town/trail.jpg");
+        this.load.image("trail-1", "assets/Backgrounds/Town/trail-1.jpg");
+        this.load.image("trail-2", "assets/Backgrounds/Town/trail-2.jpg");
         this.load.image("gramps", "assets/Characters/gramps.png");
+        this.load.image("trail-split", "assets/Backgrounds/Town/trail-split.jpg");
     }
 
     // data is for carrying across the music variable.
@@ -61,7 +63,7 @@ export default class Scene7 extends Phaser.Scene {
                 else if (this.bgNum == 2) {
                     if (this.textNum == 2) {
                         this.grampsSprite.alpha = 0
-                        this.background.setTexture('trail')
+                        this.background.setTexture('trail-1')
                         this.charNameText.setText('Emily')
                         this.charDialogue.setText('Uh guys, I need to tie my shoelaces.')
 
@@ -83,7 +85,68 @@ export default class Scene7 extends Phaser.Scene {
                         this.charNameText.setText('Zack')
                         this.charDialogue.setText("Nah, the trail is simple, we'll catch up easily.")
 
+                        this.bgNum = 3;
                         this.textNum = 6
+                    }
+                }
+                else if (this.bgNum == 3) {
+                    if (this.textNum == 6) {
+                        this.background.setTexture('trail-split')
+
+                        this.charNameText.setText('Emily')
+                        this.charDialogue.setText("Ah shoot, the trail splits.")
+
+                        this.textNum = 7
+                    }
+                    else if (this.textNum == 7) {
+                        this.charNameText.setText('Zack')
+                        this.charDialogue.setText("Let's take the left way, it looks right to me.")
+
+                        this.bgNum = 4;
+                        this.textNum = 8
+                    }
+                }
+                else if (this.bgNum == 4) {
+                    if (this.textNum == 8) {
+                        this.background.setTexture('trail-2')
+                        this.charNameText.setText('Zack')
+                        this.charDialogue.setText("Gramps must be just ahead, over that rise.")
+
+                        this.textNum = 9
+                    }
+                    else if (this.textNum == 9) {
+                        this.charNameText.setText('Emily')
+                        this.charDialogue.setText("We better hurry to catch him, it's getting dark.")
+
+                        this.bgNum = 5;
+                        this.textNum = 10
+                    }
+                }
+                else if (this.bgNum == 5) {
+                    if (this.textNum == 10) {
+                        this.background.setTexture('trail-split')
+
+                        this.charNameText.setText('Emily')
+                        this.charDialogue.setText("Ah shoot, the trail splits again!")
+                        this.textNum = 11
+                    }
+                    else if (this.textNum == 11) {
+                        this.charNameText.setText('Zack')
+                        this.charDialogue.setText("And its almost completely dark.")
+                        this.textNum = 12
+                    }
+                    else if (this.textNum == 12) {
+                        this.charDialogue.setText("Whoa!")
+                        this.textNum = 13
+                    }
+                    else if (this.textNum == 13) {
+                        this.charNameText.setText('Emily')
+                        this.charDialogue.setText("Hey Zack, are you ok?")
+                        this.textNum = 14
+                    }
+                    else if (this.textNum == 14) {
+                        this.charDialogue.setText("I think we should stop for the night. We're tired and its dark. Someone is going to get hurt.")
+                        this.textNum = 15
                     }
                 }
             }, this)
