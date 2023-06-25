@@ -141,7 +141,7 @@ app.get('/api/google-login-attempt', (req, res, next) => {
         if (req.session.isAdmin == 1)
           res.redirect('/admin');
         else
-          res.redirect('/game');
+          res.redirect('/game-menu');
       }
       else {
         // Create account.
