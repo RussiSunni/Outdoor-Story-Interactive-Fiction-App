@@ -12,9 +12,12 @@ export default class Scene6 extends Phaser.Scene {
         this.load.image("anorak", "assets/Images/anorak.png");
 
         this.load.audio('music3', '/assets/Audio/Music/shopTrack.mp3')
+        this.load.audio('choice', '/assets/Audio/SFX/choice.mp3')
     }
 
     create() {
+        this.choice = this.sound.add("choice", { loop: false });
+
         this.background = this.add.image(0, 0, "hiking-shop-interior")
             .setOrigin(.0, 0);
         this.background.displayWidth = this.sys.canvas.width;
@@ -80,6 +83,7 @@ export default class Scene6 extends Phaser.Scene {
                 this.narrative.setText('')
                 this.money = 0;
                 this.yesContainer.disableInteractive()
+                this.choice.play()
             }, this);
         }
         else {
@@ -96,6 +100,7 @@ export default class Scene6 extends Phaser.Scene {
             this.cheapBoots.alpha = 0
             this.narrative.setText('')
             this.yesContainer.disableInteractive()
+            this.choice.play()
         }, this);
     }
 
@@ -108,6 +113,7 @@ export default class Scene6 extends Phaser.Scene {
             this.anorak.alpha = 0
             this.narrative.setText('')
             this.yesContainer.disableInteractive()
+            this.choice.play()
         }, this);
     }
 }

@@ -11,10 +11,14 @@ export default class Scene2 extends Phaser.Scene {
         this.load.image("fridge", "assets/Backgrounds/Town/fridge.jpg");
         this.load.image("donuts", "assets/Images/donuts.png");
         this.load.image("sandwich", "assets/Images/sandwich.png");
+
+        this.load.audio('choice', '/assets/Audio/SFX/choice.mp3')
     }
 
     // data is for carrying across the music variable.
     create(data) {
+        this.choice = this.sound.add("choice", { loop: false });
+
         // BG 1 --------------------------------------------
         this.background = this.add.image(0, 0, "fridge")
             .setOrigin(.0, 0);
@@ -53,6 +57,8 @@ export default class Scene2 extends Phaser.Scene {
         this.narrative = this.add.text(0, this.sys.canvas.height - this.sys.canvas.height / 4, 'You choose the donuts.', { fontFamily: 'Arial', fill: '#ffffff', fontSize: 40, wordWrap: { width: this.sys.canvas.width - 15, useAdvancedWrap: true } }).setOrigin(0, 0);
         this.donuts.setAlpha(0)
         this.isFoodChosen = true
+
+        this.choice.play()
     }
 
     onSandwichButtonDown() {
@@ -60,5 +66,20 @@ export default class Scene2 extends Phaser.Scene {
         this.narrative = this.add.text(0, this.sys.canvas.height - this.sys.canvas.height / 4, 'You choose the sandwich.', { fontFamily: 'Arial', fill: '#ffffff', fontSize: 40, wordWrap: { width: this.sys.canvas.width - 15, useAdvancedWrap: true } }).setOrigin(0, 0);
         this.sandwich.setAlpha(0)
         this.isFoodChosen = true
+
+        this.choice.play()
     }
+
+    SaveChoice(choiceId, choice) {
+        var audio = new Audio('../assets/audio/choice.mp3');
+        audio.play();
+
+        fetch('/api/save-choice', {
+            method: 'POST',
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            },
+            body: JSON.stringify({ choiceId: choiceId, choice: choice })
+        });
+    };
 }
