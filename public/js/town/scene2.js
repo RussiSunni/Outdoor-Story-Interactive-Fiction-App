@@ -59,6 +59,7 @@ export default class Scene2 extends Phaser.Scene {
         this.isFoodChosen = true
 
         this.choice.play()
+        this.saveChoice(1, "Donuts");
     }
 
     onSandwichButtonDown() {
@@ -68,12 +69,10 @@ export default class Scene2 extends Phaser.Scene {
         this.isFoodChosen = true
 
         this.choice.play()
+        this.saveChoice(1, "Sandwich");
     }
 
-    SaveChoice(choiceId, choice) {
-        var audio = new Audio('../assets/audio/choice.mp3');
-        audio.play();
-
+    saveChoice(choiceId, choice) {
         fetch('/api/save-choice', {
             method: 'POST',
             headers: {
