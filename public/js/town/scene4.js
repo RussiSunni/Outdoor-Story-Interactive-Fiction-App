@@ -11,7 +11,7 @@ export default class Scene4 extends Phaser.Scene {
         this.load.image("emily", "assets/Characters/emily.png");
         this.load.image("zack", "assets/Characters/zack.png");
 
-        this.load.audio('music2', '/assets/Audio/Music/parkTrack.mp3')
+        this.load.audio('music2', '/assets/Audio/Music/parkTrackShort.mp3')
 
         // Loading screen.
         var progressBar = this.add.graphics();
@@ -62,7 +62,7 @@ export default class Scene4 extends Phaser.Scene {
         // Music -----
         this.music = this.sound.add('music2', {
             volume: 0.2,
-            loop: false
+            loop: true
         })
         this.music.play()
 
