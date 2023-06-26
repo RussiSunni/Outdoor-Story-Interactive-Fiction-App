@@ -84,6 +84,7 @@ export default class Scene6 extends Phaser.Scene {
                 this.money = 0;
                 this.yesContainer.disableInteractive()
                 this.choice.play()
+                this.saveChoice(2, "Expensive Boots");
             }, this);
         }
         else {
@@ -114,6 +115,17 @@ export default class Scene6 extends Phaser.Scene {
             this.narrative.setText('')
             this.yesContainer.disableInteractive()
             this.choice.play()
+            this.saveChoice(2, "Good Value");
         }, this);
     }
+
+    saveChoice(choiceId, choice) {
+        fetch('/api/save-choice', {
+            method: 'POST',
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            },
+            body: JSON.stringify({ choiceId: choiceId, choice: choice })
+        });
+    };
 }
