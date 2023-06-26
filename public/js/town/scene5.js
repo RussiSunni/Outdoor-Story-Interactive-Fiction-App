@@ -61,10 +61,10 @@ export default class Scene5 extends Phaser.Scene {
                         this.textNum = 4;
                         let speechOption1Graphic = this.add.graphics();
                         speechOption1Graphic.fillStyle(0x000000, 0.5);
-                        speechOption1Graphic.fillRoundedRect(0, 0, 200, 80, 16);
-                        this.speechOption1Text = this.add.text(20, 15, "$200", { fontFamily: 'Arial', fill: '#ffffff', fontSize: 40, wordWrap: { width: this.sys.canvas.width - 15, useAdvancedWrap: true } });
-                        this.speechOption1Container = this.add.container(this.sys.canvas.width / 2 - 100, this.sys.canvas.height / 2, [speechOption1Graphic, this.speechOption1Text]);
-                        this.speechOption1Container.setInteractive(new Phaser.Geom.Rectangle(0, 0, 200, 80), Phaser.Geom.Rectangle.Contains);
+                        speechOption1Graphic.fillRoundedRect(0, 0, 100, 80, 16);
+                        this.speechOption1Text = this.add.text(50, 40, "$200", { fontFamily: 'Arial', fill: '#ffffff', fontSize: 40, wordWrap: { width: this.sys.canvas.width - 15, useAdvancedWrap: true } }).setOrigin(0.5);
+                        this.speechOption1Container = this.add.container(this.sys.canvas.width / 2 - 50, this.sys.canvas.height / 2, [speechOption1Graphic, this.speechOption1Text]);
+                        this.speechOption1Container.setInteractive(new Phaser.Geom.Rectangle(0, 0, 100, 80), Phaser.Geom.Rectangle.Contains);
                         this.speechOption1Container.on('pointerdown', function () {
                             this.textNum = 5;
                             this.speechOption1Container.alpha = 0
