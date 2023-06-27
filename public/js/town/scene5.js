@@ -117,7 +117,7 @@ export default class Scene5 extends Phaser.Scene {
                         }, this);
                     }
                     else if (this.textNum == 5) {
-                        this.scene.start("Scene6");
+                        this.scene.start("Scene6", { music: this.music });
                     }
                 }
             }, this)

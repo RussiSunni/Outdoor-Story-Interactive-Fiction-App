@@ -83,6 +83,7 @@ export default class Scene7 extends Phaser.Scene {
         this.input.on('pointerdown',
             function () {
                 if (this.bgNum == 0) {
+                    data.music.stop()
                     this.background.setTexture('driving')
                     this.narrative.setText("Soon enough, the big day came. Emily and her father, Grandpa, Zack, and you all drove to the wilderness.",)
                     this.bgNum = 1;

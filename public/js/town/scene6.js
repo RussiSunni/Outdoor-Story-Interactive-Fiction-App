@@ -59,7 +59,7 @@ export default class Scene6 extends Phaser.Scene {
         });
     }
 
-    create() {
+    create(data) {
         this.choice = this.sound.add("choice", { loop: false });
 
         this.background = this.add.image(0, 0, "hiking-shop-interior")
@@ -113,8 +113,10 @@ export default class Scene6 extends Phaser.Scene {
             function () {
                 if (this.money <= 0) {
                     i++
-                    if (i == 1)
-                        this.scene.start("Scene7");
+                    if (i == 1) {
+
+                        this.scene.start("Scene7", { music: data.music });
+                    }
                 }
             }, this)
     }
