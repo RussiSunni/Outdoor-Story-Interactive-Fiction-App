@@ -113,7 +113,7 @@ export default class Scene6 extends Phaser.Scene {
             function () {
                 if (this.money <= 0) {
                     i++
-                    if (i == 2)
+                    if (i == 1)
                         this.scene.start("Scene7");
                 }
             }, this)
@@ -127,6 +127,8 @@ export default class Scene6 extends Phaser.Scene {
                 this.narrative.setText('')
                 this.money = 0;
                 this.yesContainer.disableInteractive()
+                this.expensiveBoots.alpha = 0
+                this.expensiveBoots.disableInteractive()
                 this.choice.play()
                 this.saveChoice(2, "Expensive Boots");
             }, this);
@@ -141,7 +143,7 @@ export default class Scene6 extends Phaser.Scene {
         this.narrative.setText('Buy second hand boots for $100?')
         this.yesContainer.on('pointerdown', function () {
             this.money = this.money - 100;
-            this.cheapBoots.setInteractive(false);
+            this.cheapBoots.disableInteractive()
             this.cheapBoots.alpha = 0
             this.narrative.setText('')
             this.yesContainer.disableInteractive()
@@ -154,7 +156,7 @@ export default class Scene6 extends Phaser.Scene {
         this.narrative.setText('Buy anorak for $100?')
         this.yesContainer.on('pointerdown', function () {
             this.money = this.money - 100;
-            this.anorak.setInteractive(false);
+            this.anorak.disableInteractive()
             this.anorak.alpha = 0
             this.narrative.setText('')
             this.yesContainer.disableInteractive()
